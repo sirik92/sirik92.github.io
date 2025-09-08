@@ -31,9 +31,24 @@ body {
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-.logo h1 {
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-img {
+    height: 50px;
+    width: 50px;
+    object-fit: contain;
+}
+
+.logo-container h1 {
     color: var(--primary-color);
     font-size: 1.8rem;
 }
@@ -44,35 +59,31 @@ body {
     align-items: center;
 }
 
+.nav-links li {
+    margin-left: 1.5rem;
+}
+
 .nav-links li a {
     color: var(--secondary-color);
     text-decoration: none;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0;
     transition: color 0.3s ease;
+    font-weight: 500;
 }
 
 .nav-links li a:hover {
     color: var(--primary-color);
 }
 
-.search-box {
-    position: relative;
-    margin-left: 1rem;
-}
-
-.search-box input {
-    padding: 0.5rem 1rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    outline: none;
-}
-
 .search-icon {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
+    font-size: 1.3rem;
     color: var(--secondary-color);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.search-icon:hover {
+    color: var(--primary-color);
 }
 
 /* Hero Section */
@@ -111,11 +122,18 @@ body {
 
 .about h2 {
     margin-bottom: 2rem;
+    color: var(--secondary-color);
 }
 
 .about-content {
     max-width: 800px;
     margin: 0 auto;
+    text-align: left;
+}
+
+.about-content p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
 }
 
 /* Buttons */
@@ -127,6 +145,9 @@ body {
     text-decoration: none;
     border-radius: 5px;
     transition: background 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
 }
 
 .cta-button:hover {
@@ -141,6 +162,7 @@ body {
 .services h2 {
     text-align: center;
     margin-bottom: 3rem;
+    color: var(--secondary-color);
 }
 
 .services-grid {
@@ -177,6 +199,7 @@ body {
 .portfolio h2 {
     text-align: center;
     margin-bottom: 3rem;
+    color: var(--secondary-color);
 }
 
 .portfolio-grid {
@@ -225,6 +248,7 @@ body {
 .contact h2 {
     text-align: center;
     margin-bottom: 3rem;
+    color: var(--secondary-color);
 }
 
 .contact-content {
@@ -255,6 +279,7 @@ body {
     padding: 0.8rem;
     border: 1px solid #ddd;
     border-radius: 5px;
+    width: 100%;
 }
 
 .contact-form textarea {
@@ -275,16 +300,34 @@ body {
     margin-bottom: 2rem;
 }
 
+.footer-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+
+.footer-logo {
+    height: 40px;
+    width: 40px;
+    object-fit: contain;
+}
+
 .footer-section h3 {
     margin-bottom: 1rem;
+    color: white;
 }
 
 .footer-section ul {
     list-style: none;
 }
 
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
 .footer-section ul li a {
-    color: white;
+    color: #ccc;
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -296,6 +339,7 @@ body {
 .social-links {
     display: flex;
     gap: 1rem;
+    margin-top: 1rem;
 }
 
 .social-links a {
@@ -312,6 +356,7 @@ body {
     text-align: center;
     padding-top: 1rem;
     border-top: 1px solid rgba(255,255,255,0.1);
+    margin-top: 2rem;
 }
 
 /* Mobile Responsiveness */
@@ -330,10 +375,12 @@ body {
 }
 
 @media (max-width: 768px) {
+    .navbar {
+        position: static;
+    }
     .hamburger {
         display: block;
     }
-
     .nav-links {
         position: fixed;
         top: 80px;
@@ -346,19 +393,15 @@ body {
         padding-top: 2rem;
         transition: left 0.3s ease;
     }
-
     .nav-links.active {
         left: 0;
     }
-
     .nav-links li {
         margin: 1rem 0;
     }
-
     .hero h1 {
         font-size: 2.5rem;
     }
-
     .contact-content {
         grid-template-columns: 1fr;
     }
