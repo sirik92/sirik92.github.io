@@ -1,21 +1,26 @@
-
-// Navigation menu toggle for mobile
 document.addEventListener('DOMContentLoaded', function() {
+    // Hamburger menu functionality
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     
-    hamburger.addEventListener('click', function() {
+    hamburger.addEventListener('click', () => {
         navLinks.classList.toggle('active');
         hamburger.classList.toggle('active');
     });
 
-    // Smooth scrolling for navigation links
+    // Smooth scroll for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Close mobile menu if open
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
         });
     });
 
@@ -25,20 +30,49 @@ document.addEventListener('DOMContentLoaded', function() {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             // Add your form submission logic here
-            alert('Thank you for your message. We will get back to you soon!');
+            alert('Thank you for your message! We will get back to you soon.');
             contactForm.reset();
         });
     }
 
-    // Portfolio image loading animation
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
-    portfolioItems.forEach(item => {
-        item.addEventListener('mouseenter', function() {
-            this.querySelector('.portfolio-overlay').style.bottom = '0';
+    // Scroll animations
+    const elements = document.querySelectorAll('.service-card, .portfolio-item');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+            }
         });
-        
-        item.addEventListener('mouseleave', function() {
-            this.querySelector('.portfolio-overlay').style.bottom = '-100%';
-        });
+    }, {
+        threshold: 0.1
+    });
+
+    elements.forEach(element => {
+        observer.observe(element);
     });
 });
+
+// Add some animation classes
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .fade-in {
+        animation: fadeIn 0.6s ease-out forwards;
+    }
+
+    .service-card, .portfolio-item {
+        opacity: 0;
+    }
+`;
+document.head.appendChild(style);
