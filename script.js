@@ -8,6 +8,27 @@ document.addEventListener('DOMContentLoaded', function() {
         hamburger.classList.toggle('active');
     });
 
+    // Search Pane
+ const searchIcon = document.querySelector('.search-icon');
+ const searchPane = document.getElementById('searchPane');
+ const closeSearch = document.querySelector('.close-search');
+
+ searchIcon.addEventListener('click', () => {
+     searchPane.classList.add('active');
+ });
+ closeSearch.addEventListener('click', () => {
+     searchPane.classList.remove('active');
+ });
+
+ // Map Initialization
+ const map = L.map('map').setView([51.505, -0.09], 13);
+ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+     attribution: '© OpenStreetMap contributors'
+ }).addTo(map);
+ L.marker([51.5, -0.09]).addTo(map)
+     .bindPopup('VAL-Construction')
+     .openPopup();
+
     // Smooth scroll for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
@@ -22,6 +43,35 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+
+    // video section
+    const videoItems = document.querySelectorAll('.video-item');
+
+videoItems.forEach(item => {
+    const video = item.querySelector('.video-player');
+    const playButton = item.querySelector('.play-button');
+
+    // Show play button if video is paused
+    video.addEventListener('pause', () => {
+        playButton.style.opacity = '1';
+    });
+
+    // Hide play button if video is playing
+    video.addEventListener('play', () => {
+        playButton.style.opacity = '0';
+    });
+
+    // Toggle play/pause on play button click
+    playButton.addEventListener('click', () => {
+        if (video.paused) {
+            video.play();
+        } else {
+            video.pause();
+        }
+    });
+});
+
 
     // Form submission handling
     const contactForm = document.querySelector('.contact-form');
