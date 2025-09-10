@@ -90,7 +90,7 @@ body {
 .hero {
     height: 70vh;
     background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-                url('https://ikghd.site/vl/hero.jpg') center/cover;
+                url('https://val-company.com/vl/hero.jpg') center/cover;
     display: flex;
     align-items: center;
     text-align: center;
