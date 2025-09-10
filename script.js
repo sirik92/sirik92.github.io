@@ -121,3 +121,55 @@ videoItems.forEach(item => {
     `;
     document.head.appendChild(style);
 });
+
+// Portfolio Detail Pane
+const portfolioItems = document.querySelectorAll('.portfolio-item');
+const portfolioPane = document.getElementById('portfolioPane');
+const closePane = document.querySelector('.close-pane');
+const paneTitle = document.getElementById('paneTitle');
+const paneDescription = document.getElementById('paneDescription');
+const paneImage = document.getElementById('paneImage');
+
+portfolioItems.forEach(item => {
+    item.addEventListener('click', () => {
+        const title = item.getAttribute('data-title');
+        const description = item.getAttribute('data-description');
+        const image = item.querySelector('img').src;
+
+        paneTitle.textContent = title;
+        paneDescription.textContent = description;
+        paneImage.src = image;
+
+        portfolioPane.classList.add('active');
+    });
+});
+
+closePane.addEventListener('click', () => {
+    portfolioPane.classList.remove('active');
+});
+
+// Close mobile menu after clicking a link
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.querySelector('.nav-links').classList.remove('active');
+        document.querySelector('.hamburger').classList.remove('active');
+    });
+});
+
+// Back to Top Arrow
+const backToTop = document.getElementById('backToTop');
+
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+        backToTop.classList.add('active');
+    } else {
+        backToTop.classList.remove('active');
+    }
+});
+
+backToTop.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.querySelector('#home').scrollIntoView({
+        behavior: 'smooth'
+    });
+});
