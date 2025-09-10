@@ -9,14 +9,6 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 </head>
 <body>
-    <!-- Search Pane -->
-    <div class="search-pane" id="searchPane">
-        <div class="search-pane-content">
-            <span class="close-search">&times;</span>
-            <input type="text" placeholder="Search..." class="search-input">
-        </div>
-    </div>
-
     <nav class="navbar">
         <div class="logo-container">
             <img src="https://val-company.com/vls1.png" alt="VAL-Construction Logo" class="logo-img">
@@ -28,7 +20,6 @@
             <li><a href="#portfolio">Portfolio</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
-            <!-- <li><i class="fas fa-search search-icon"></i></li> -->
         </ul>
         <div class="hamburger">
             <span></span>
@@ -45,27 +36,22 @@
         </div>
     </section>
 
-    <!-- Video Section -->
     <section class="video-section">
         <div class="video-grid">
             <div class="video-item">
                 <video class="video-player" autoplay muted loop poster="path_to_thumbnail_image.jpg">
-                    <source src="https://val-company.com/vls2.mp4" type="video/mp4">
+                    <source src="https://www.val-company.com/vls2.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <!-- <div class="play-button">▶</div> -->
             </div>
             <div class="video-item">
                 <video class="video-player" autoplay muted loop poster="path_to_thumbnail_image.jpg">
-                    <source src="https://val-company.com/vls1.mp4" type="video/mp4">
+                    <source src="https://www.val-company.com/vls1.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <!-- <div class="play-button">▶</div> -->
             </div>
         </div>
     </section>
-
-
 
     <section id="services" class="services">
         <h2>Our Services</h2>
@@ -96,42 +82,42 @@
     <section id="portfolio" class="portfolio">
         <h2>Our Projects</h2>
         <div class="portfolio-grid">
-            <div class="portfolio-item">
+            <div class="portfolio-item" data-title="Commercial Center" data-description="Modern office complex in downtown">
                 <img src="https://web-clients-s3.s3.eu-west-2.amazonaws.com/Admin%20-%20Construction%20&%20Contract/projects/lnKGL5le0B8DPz0I5gHaRlGcW543OxkjIFRSJcFx.png" alt="Commercial Project">
                 <div class="portfolio-overlay">
                     <h3>Commercial Center</h3>
                     <p>Modern office complex in downtown</p>
                 </div>
             </div>
-            <div class="portfolio-item">
+            <div class="portfolio-item" data-title="Qushtapa Silo Project" data-description="Premium residential development">
                 <img src="https://web-clients-s3.s3.eu-west-2.amazonaws.com/Admin%20-%20Construction%20&%20Contract/projects/reU8Fc4JEPUWQP1E2upwGcVKeWT9QtVV1q9oFTja.jpg" alt="Residential Project">
                 <div class="portfolio-overlay">
                     <h3>Qushtapa Silo Project</h3>
                     <p>Premium residential development</p>
                 </div>
             </div>
-            <div class="portfolio-item">
+            <div class="portfolio-item" data-title="Kalar Silo Project" data-description="Major highway reconstruction">
                 <img src="https://web-clients-s3.s3.eu-west-2.amazonaws.com/Admin%20-%20Construction%20&%20Contract/projects/28xQxzWatnlZrzzZdLLNyI0KsApQPguElfrjrRnw.jpg" alt="Infrastructure Project">
                 <div class="portfolio-overlay">
                     <h3>Kalar Silo Project</h3>
                     <p>Major highway reconstruction</p>
                 </div>
             </div>
-            <div class="portfolio-item">
+            <div class="portfolio-item" data-title="Commercial Center" data-description="Modern office complex in downtown">
                 <img src="https://admingroup.construction/images/img-about.png" alt="Commercial Project">
                 <div class="portfolio-overlay">
                     <h3>Commercial Center</h3>
                     <p>Modern office complex in downtown</p>
                 </div>
             </div>
-            <div class="portfolio-item">
+            <div class="portfolio-item" data-title="Luxury Homes" data-description="Premium residential development">
                 <img src="https://images.unsplash.com/photo-1516156008625-3a9d6067fab5" alt="Residential Project">
                 <div class="portfolio-overlay">
                     <h3>Luxury Homes</h3>
                     <p>Premium residential development</p>
                 </div>
             </div>
-            <div class="portfolio-item">
+            <div class="portfolio-item" data-title="Infrastructure" data-description="Major highway reconstruction">
                 <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd" alt="Infrastructure Project">
                 <div class="portfolio-overlay">
                     <h3>Infrastructure</h3>
@@ -140,6 +126,16 @@
             </div>
         </div>
     </section>
+
+    <!-- Portfolio Detail Pane -->
+    <div class="portfolio-pane" id="portfolioPane">
+        <div class="portfolio-pane-content">
+            <span class="close-pane">&times;</span>
+            <h2 id="paneTitle">Project Title</h2>
+            <p id="paneDescription">Project description goes here.</p>
+            <img id="paneImage" src="" alt="Project Image">
+        </div>
+    </div>
 
     <section id="about" class="about">
         <h2>About Us</h2>
@@ -166,8 +162,6 @@
                     <p>Office No. 1, 14th Floor, T4 Tower, Empire World Business Center</p>
                 </div>
             </div>
-            <!-- Map Section -->
-            <!-- <div id="map" class="map-container"></div> -->
         </div>
     </section>
 
@@ -204,6 +198,11 @@
             <p>&copy; 2025 VAL-Construction. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Back to Top Arrow -->
+    <a href="#home" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="script.js"></script>
