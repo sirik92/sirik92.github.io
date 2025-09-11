@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VAL-Construction | Professional Construction Services</title>
-    <link rel="shortcut icon" type="image/ico" href="favicon.ico">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
@@ -15,10 +14,18 @@
             <img src="https://val-company.com/vls1.png" alt="VAL-Construction Logo" class="logo-img">
             <h1>VAL-Construction</h1>
         </div>
+        <div class="dark-mode-toggle">
+            <input type="checkbox" id="darkModeCheck" class="dark-mode-check">
+            <label for="darkModeCheck" class="dark-mode-label">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
+            </label>
+        </div>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="our-work.html">Our Work</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -40,15 +47,13 @@
     <section class="video-section">
         <div class="video-grid">
             <div class="video-item">
-                <video class="video-player" autoplay muted loop poster="path_to_thumbnail_image.jpg">
+                <video class="video-player" autoplay muted loop>
                     <source src="https://www.val-company.com/vls2.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
                 </video>
             </div>
             <div class="video-item">
-                <video class="video-player" autoplay muted loop poster="path_to_thumbnail_image.jpg">
+                <video class="video-player" autoplay muted loop>
                     <source src="https://www.val-company.com/vls1.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
                 </video>
             </div>
         </div>
@@ -83,6 +88,7 @@
     <section id="portfolio" class="portfolio">
         <h2>Our Projects</h2>
         <div class="portfolio-grid">
+            <!-- Top Row: 3 Images -->
             <div class="portfolio-item" data-title="Commercial Center" data-description="Modern office complex in downtown">
                 <img src="https://web-clients-s3.s3.eu-west-2.amazonaws.com/Admin%20-%20Construction%20&%20Contract/projects/lnKGL5le0B8DPz0I5gHaRlGcW543OxkjIFRSJcFx.png" alt="Commercial Project">
                 <div class="portfolio-overlay">
@@ -104,6 +110,7 @@
                     <p>Major highway reconstruction</p>
                 </div>
             </div>
+            <!-- Bottom Row: 3 Images -->
             <div class="portfolio-item" data-title="Commercial Center" data-description="Modern office complex in downtown">
                 <img src="https://admingroup.construction/images/img-about.png" alt="Commercial Project">
                 <div class="portfolio-overlay">
@@ -128,7 +135,6 @@
         </div>
     </section>
 
-    <!-- Portfolio Detail Pane -->
     <div class="portfolio-pane" id="portfolioPane">
         <div class="portfolio-pane-content">
             <span class="close-pane">&times;</span>
@@ -144,6 +150,13 @@
             <p>VAL-Construction is a leading provider of innovative and sustainable construction solutions. With over a decade of experience, we specialize in delivering high-quality projects on time and within budget. Our team of experts is committed to excellence, safety, and customer satisfaction.</p>
             <p>We believe in building not just structures, but lasting relationships with our clients and partners. Our mission is to shape the future of construction through innovation, integrity, and professionalism.</p>
         </div>
+        <br>
+        <div class="about-images">
+            <img src="https://admingroup.construction/images/img-about.png" alt="About Image 1">
+            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd" alt="About Image 2">
+            <img src="https://images.unsplash.com/photo-1516156008625-3a9d6067fab5" alt="About Image 3">
+        </div>
+
     </section>
 
     <section id="contact" class="contact">
@@ -200,7 +213,6 @@
         </div>
     </footer>
 
-    <!-- Back to Top Arrow -->
     <a href="#home" class="back-to-top" id="backToTop">
         <i class="fas fa-arrow-up"></i>
     </a>
