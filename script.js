@@ -1,175 +1,100 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Hamburger menu functionality
+    // Dark Mode Toggle
+    const darkModeCheck = document.getElementById('darkModeCheck');
+    const body = document.body;
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        body.classList.add('dark-mode');
+        darkModeCheck.checked = true;
+    }
+    darkModeCheck.addEventListener('change', () => {
+        if (darkModeCheck.checked) {
+            body.classList.add('dark-mode');
+            localStorage.setItem('darkMode', 'enabled');
+        } else {
+            body.classList.remove('dark-mode');
+            localStorage.setItem('darkMode', 'disabled');
+        }
+    });
+
+    // Hamburger Menu
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
-
     hamburger.addEventListener('click', () => {
         navLinks.classList.toggle('active');
         hamburger.classList.toggle('active');
     });
 
-    // Search Pane
- const searchIcon = document.querySelector('.search-icon');
- const searchPane = document.getElementById('searchPane');
- const closeSearch = document.querySelector('.close-search');
-
- searchIcon.addEventListener('click', () => {
-     searchPane.classList.add('active');
- });
- closeSearch.addEventListener('click', () => {
-     searchPane.classList.remove('active');
- });
-
- // Map Initialization
- const map = L.map('map').setView([51.505, -0.09], 13);
- L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-     attribution: '© OpenStreetMap contributors'
- }).addTo(map);
- L.marker([51.5, -0.09]).addTo(map)
-     .bindPopup('VAL-Construction')
-     .openPopup();
-
-    // Smooth scroll for navigation links
+    // Smooth Scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth'
-                });
+                target.scrollIntoView({ behavior: 'smooth' });
                 navLinks.classList.remove('active');
                 hamburger.classList.remove('active');
             }
         });
     });
 
-
-    // video section
-    const videoItems = document.querySelectorAll('.video-item');
-
-videoItems.forEach(item => {
-    const video = item.querySelector('.video-player');
-    const playButton = item.querySelector('.play-button');
-
-    // Show play button if video is paused
-    video.addEventListener('pause', () => {
-        playButton.style.opacity = '1';
+    // Portfolio Pane
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    const portfolioPane = document.getElementById('portfolioPane');
+    const closePane = document.querySelector('.close-pane');
+    const paneTitle = document.getElementById('paneTitle');
+    const paneDescription = document.getElementById('paneDescription');
+    const paneImage = document.getElementById('paneImage');
+    portfolioItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const title = item.getAttribute('data-title');
+            const description = item.getAttribute('data-description');
+            const image = item.querySelector('img').src;
+            paneTitle.textContent = title;
+            paneDescription.textContent = description;
+            paneImage.src = image;
+            portfolioPane.classList.add('active');
+        });
+    });
+    closePane.addEventListener('click', () => {
+        portfolioPane.classList.remove('active');
     });
 
-    // Hide play button if video is playing
-    video.addEventListener('play', () => {
-        playButton.style.opacity = '0';
-    });
-
-    // Toggle play/pause on play button click
-    playButton.addEventListener('click', () => {
-        if (video.paused) {
-            video.play();
+    // Back to Top
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTop.classList.add('active');
         } else {
-            video.pause();
+            backToTop.classList.remove('active');
         }
     });
-});
+    backToTop.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelector('#home').scrollIntoView({ behavior: 'smooth' });
+    });
 
-
-    // Form submission handling
-    const contactForm = document.querySelector('.contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your message! We will get back to you soon.');
-            contactForm.reset();
+    // Close Mobile Menu
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            hamburger.classList.remove('active');
         });
-    }
-
-    // Scroll animations
-    const elements = document.querySelectorAll('.service-card, .portfolio-item');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in');
-            }
-        });
-    }, {
-        threshold: 0.1
-    });
-
-    elements.forEach(element => {
-        observer.observe(element);
-    });
-
-    // Add animation classes
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .fade-in {
-            animation: fadeIn 0.6s ease-out forwards;
-        }
-        .service-card, .portfolio-item {
-            opacity: 0;
-        }
-    `;
-    document.head.appendChild(style);
-});
-
-// Portfolio Detail Pane
-const portfolioItems = document.querySelectorAll('.portfolio-item');
-const portfolioPane = document.getElementById('portfolioPane');
-const closePane = document.querySelector('.close-pane');
-const paneTitle = document.getElementById('paneTitle');
-const paneDescription = document.getElementById('paneDescription');
-const paneImage = document.getElementById('paneImage');
-
-portfolioItems.forEach(item => {
-    item.addEventListener('click', () => {
-        const title = item.getAttribute('data-title');
-        const description = item.getAttribute('data-description');
-        const image = item.querySelector('img').src;
-
-        paneTitle.textContent = title;
-        paneDescription.textContent = description;
-        paneImage.src = image;
-
-        portfolioPane.classList.add('active');
     });
 });
 
-closePane.addEventListener('click', () => {
-    portfolioPane.classList.remove('active');
-});
-
-// Close mobile menu after clicking a link
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        document.querySelector('.nav-links').classList.remove('active');
-        document.querySelector('.hamburger').classList.remove('active');
-    });
-});
-
-// Back to Top Arrow
-const backToTop = document.getElementById('backToTop');
-
+// Hide navbar on scroll
+let lastScroll = 0;
+const navbar = document.querySelector('.navbar');
 window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 300) {
-        backToTop.classList.add('active');
-    } else {
-        backToTop.classList.remove('active');
+    const currentScroll = window.pageYOffset;
+    if (currentScroll <= 0) {
+        navbar.classList.remove('hide');
+        return;
     }
-});
-
-backToTop.addEventListener('click', (e) => {
-    e.preventDefault();
-    document.querySelector('#home').scrollIntoView({
-        behavior: 'smooth'
-    });
+    if (currentScroll > lastScroll && !navbar.classList.contains('hide')) {
+        navbar.classList.add('hide');
+    } else if (currentScroll < lastScroll && navbar.classList.contains('hide')) {
+        navbar.classList.remove('hide');
+    }
+    lastScroll = currentScroll;
 });
