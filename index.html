@@ -3,29 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VAL-Construction | Professional Construction Services</title>
+    <title>VAL Company | Professional Construction Services</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Navbar -->
     <nav class="navbar">
         <div class="logo-container">
-            <img src="https://val-company.com/vls1.png" alt="VAL-Construction Logo" class="logo-img">
-            <h1>VAL-Construction</h1>
-        </div>
-        <div class="dark-mode-toggle">
-            <input type="checkbox" id="darkModeCheck" class="dark-mode-check">
-<!--             <label for="darkModeCheck" class="dark-mode-label">
-                <i class="fas fa-moon"></i>
-                <i class="fas fa-sun"></i> -->
-            </label>
+            <img src="https://val-company.com/vls1.png" alt="VAL Company Logo" class="logo-img">
+            <div class="text-container">
+                <h1>VAL Company</h1>
+                <p class="slogan">بریکاری سەرەکی کارگەی دابین</p>
+            </div>
         </div>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#services">Services</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="our-work.html">Our Work</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -36,6 +32,7 @@
         </div>
     </nav>
 
+    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
             <h1>Building Tomorrow's World Today</h1>
@@ -44,6 +41,7 @@
         </div>
     </section>
 
+    <!-- Video Section -->
     <section class="video-section">
         <div class="video-grid">
             <div class="video-item">
@@ -59,113 +57,43 @@
         </div>
     </section>
 
+    <!-- Services Section -->
     <section id="services" class="services">
         <h2>Our Services</h2>
         <div class="services-grid">
             <div class="service-card">
-                <i class="fas fa-building"></i>
-                <h3>Commercial Construction</h3>
-                <p>State-of-the-art commercial buildings and facilities</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-home"></i>
-                <h3>Residential Projects</h3>
-                <p>Custom homes and residential developments</p>
-            </div>
-            <div class="service-card">
-                <i class="fas fa-tools"></i>
-                <h3>Renovations</h3>
-                <p>Modern renovations and property improvements</p>
+                <i class="fas fa-industry"></i>
+                <h3>Super Cement</h3>
+                <p>High-quality cement for superior strength and durability in all construction projects.</p>
             </div>
             <div class="service-card">
                 <i class="fas fa-hard-hat"></i>
-                <h3>Project Management</h3>
-                <p>Professional project planning and execution</p>
+                <h3>Super Cement OPC</h3>
+                <p>Ordinary Portland Cement (OPC) for reliable and consistent performance in general construction.</p>
             </div>
         </div>
     </section>
 
-    <section id="portfolio" class="portfolio">
-        <h2>Our Projects</h2>
-        <div class="portfolio-grid">
-            <!-- Top Row: 3 Images -->
-            <div class="portfolio-item" data-title="Commercial Center" data-description="Modern office complex in downtown">
-                <img src="https://web-clients-s3.s3.eu-west-2.amazonaws.com/Admin%20-%20Construction%20&%20Contract/projects/lnKGL5le0B8DPz0I5gHaRlGcW543OxkjIFRSJcFx.png" alt="Commercial Project">
-                <div class="portfolio-overlay">
-                    <h3>Commercial Center</h3>
-                    <p>Modern office complex in downtown</p>
-                </div>
-            </div>
-            <div class="portfolio-item" data-title="Qushtapa Silo Project" data-description="Premium residential development">
-                <img src="https://web-clients-s3.s3.eu-west-2.amazonaws.com/Admin%20-%20Construction%20&%20Contract/projects/reU8Fc4JEPUWQP1E2upwGcVKeWT9QtVV1q9oFTja.jpg" alt="Residential Project">
-                <div class="portfolio-overlay">
-                    <h3>Qushtapa Silo Project</h3>
-                    <p>Premium residential development</p>
-                </div>
-            </div>
-            <div class="portfolio-item" data-title="Kalar Silo Project" data-description="Major highway reconstruction">
-                <img src="https://web-clients-s3.s3.eu-west-2.amazonaws.com/Admin%20-%20Construction%20&%20Contract/projects/28xQxzWatnlZrzzZdLLNyI0KsApQPguElfrjrRnw.jpg" alt="Infrastructure Project">
-                <div class="portfolio-overlay">
-                    <h3>Kalar Silo Project</h3>
-                    <p>Major highway reconstruction</p>
-                </div>
-            </div>
-            <!-- Bottom Row: 3 Images -->
-            <div class="portfolio-item" data-title="Commercial Center" data-description="Modern office complex in downtown">
-                <img src="https://admingroup.construction/images/img-about.png" alt="Commercial Project">
-                <div class="portfolio-overlay">
-                    <h3>Commercial Center</h3>
-                    <p>Modern office complex in downtown</p>
-                </div>
-            </div>
-            <div class="portfolio-item" data-title="Luxury Homes" data-description="Premium residential development">
-                <img src="https://images.unsplash.com/photo-1516156008625-3a9d6067fab5" alt="Residential Project">
-                <div class="portfolio-overlay">
-                    <h3>Luxury Homes</h3>
-                    <p>Premium residential development</p>
-                </div>
-            </div>
-            <div class="portfolio-item" data-title="Infrastructure" data-description="Major highway reconstruction">
-                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd" alt="Infrastructure Project">
-                <div class="portfolio-overlay">
-                    <h3>Infrastructure</h3>
-                    <p>Major highway reconstruction</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="portfolio-pane" id="portfolioPane">
-        <div class="portfolio-pane-content">
-            <span class="close-pane">&times;</span>
-            <h2 id="paneTitle">Project Title</h2>
-            <p id="paneDescription">Project description goes here.</p>
-            <img id="paneImage" src="" alt="Project Image">
-        </div>
-    </div>
-
+    <!-- About Section -->
     <section id="about" class="about">
         <h2>About Us</h2>
         <div class="about-content">
-            <p>VAL-Construction is a leading provider of innovative and sustainable construction solutions. With over a decade of experience, we specialize in delivering high-quality projects on time and within budget. Our team of experts is committed to excellence, safety, and customer satisfaction.</p>
+            <p>VAL Company is a leading provider of innovative and sustainable construction solutions. With over a decade of experience, we specialize in delivering high-quality projects on time and within budget. Our team of experts is committed to excellence, safety, and customer satisfaction.</p>
             <p>We believe in building not just structures, but lasting relationships with our clients and partners. Our mission is to shape the future of construction through innovation, integrity, and professionalism.</p>
         </div>
-        <br>
         <div class="about-images">
-            <img src="https://admingroup.construction/images/img-about.png" alt="About Image 1">
-            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd" alt="About Image 2">
-            <img src="https://images.unsplash.com/photo-1516156008625-3a9d6067fab5" alt="About Image 3">
+            <img src="https://scontent.febl5-1.fna.fbcdn.net/v/t39.30808-6/530224179_122132189390857774_455002321536201224_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_ohc=CPCGzyVsguIQ7kNvwEApv_2&_nc_oc=Adnym3f1tmSSMBjONcLgDF1ePjMFroPIxuNLeQByinF8i1gqLzWN4EnL-gtpp3UqXd4&_nc_zt=23&_nc_ht=scontent.febl5-1.fna&_nc_gid=8kempwN0MCG9Fs6e2hdoCQ&oh=00_AfYiRzPtY02bgKzpeTxtFCWPdaON-w09AZLpVmyPbp_NVQ&oe=68D612FB" alt="About Image">
         </div>
-
     </section>
 
+    <!-- Contact Section -->
     <section id="contact" class="contact">
         <h2>Contact Us</h2>
         <div class="contact-content">
             <div class="contact-info">
                 <div class="info-item">
                     <i class="fas fa-phone"></i>
-                    <p>+964 750 174 1432</p>
+                    <p>+964 750 174 1432 - 0770 036 3020 - 0786 287 4849</p>
                 </div>
                 <div class="info-item">
                     <i class="fas fa-envelope"></i>
@@ -179,12 +107,13 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
                 <div class="footer-logo-container">
-                    <img src="https://val-company.com/vls1.png" alt="VAL-Construction Logo" class="footer-logo">
-                    <h3>VAL-Construction</h3>
+                    <img src="https://val-company.com/vls1.png" alt="VAL Company Logo" class="footer-logo">
+                    <h3>VAL Company</h3>
                 </div>
                 <p>Building the future with quality and integrity.</p>
             </div>
@@ -193,7 +122,6 @@
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#services">Services</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
@@ -202,21 +130,22 @@
                 <h3>Connect With Us</h3>
                 <div class="social-links">
                     <a href="https://www.facebook.com/Val.company.iq"><i class="fab fa-facebook"></i></a>
-                    <a href="https://www.facebook.com/Val.company.iq"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.facebook.com/Val.company.iq"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://wa.me/7501741432"><i class="fab fa-whatsapp"></i></a>
                     <a href="https://www.instagram.com/val_company_"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 VAL-Construction. All rights reserved.</p>
+            <p>&copy; 2025 VAL Company. All rights reserved.</p>
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
     <a href="#home" class="back-to-top" id="backToTop">
         <i class="fas fa-arrow-up"></i>
     </a>
 
+    <!-- Scripts -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="script.js"></script>
 </body>
