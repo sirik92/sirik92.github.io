@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VAL Company | Projects</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        valYellow: '#F2D26D',
+                        valGray: '#474747',
+                        valDark: '#1A1A1A',
+                    },
+                    fontFamily: {
+                        'brand': ['Eras ITC', 'Montserrat', 'sans-serif'],
+                        'body': ['Montserrat', 'Noto Sans Arabic', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        body.rtl { direction: rtl; font-family: 'Noto Sans Arabic', 'Montserrat', sans-serif; }
+        .hero-bg { background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('https://val-company.com/hero0.jpg'); background-size: cover; background-position: center; background-attachment: fixed; }
+        .lang-btn.active { color: #F2D26D; font-weight: bold; border-bottom: 2px solid #F2D26D; }
+        @media (max-width: 768px) { .hero-bg { background-attachment: scroll; } }
+    </style>
+</head>
+<body class="bg-gray-50 font-body text-gray-800">
+
+    <nav class="fixed w-full z-50 bg-white shadow-lg border-b-2 border-valYellow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center space-x-3">
+                    <img src="https://val-company.com/vls1.png" alt="VAL Logo" class="h-12 w-auto">
+                    <div class="flex flex-col">
+                        <span class="text-xl md:text-2xl font-brand font-black text-valGray leading-none uppercase">VAL Company</span>
+                        <span class="text-[9px] font-bold text-valYellow uppercase tracking-wider" data-i18n="nav-sub">the main agent for Dabin Cement</span>
+                    </div>
+                </div>
+
+                <div class="hidden lg:flex items-center space-x-8 text-xs font-black uppercase tracking-widest text-valGray">
+                    <a href="index.html" class="hover:text-valYellow transition" data-i18n="menu-home">Home</a>
+                    <a href="index.html#about" class="hover:text-valYellow transition" data-i18n="menu-about">About</a>
+                    <a href="index.html#products" class="hover:text-valYellow transition" data-i18n="menu-products">Products</a>
+                    <a href="#projects" class="hover:text-valYellow transition" data-i18n="menu-projects">Projects</a>
+                    <a href="index.html#services-page" class="hover:text-valYellow transition" data-i18n="menu-services-page">Services</a>
+                    <a href="index.html#contact" class="bg-valGray text-white px-5 py-2 rounded hover:bg-valYellow transition" data-i18n="menu-contact">Contact</a>
+                    <div class="flex items-center space-x-3 border-l pl-6 border-gray-200">
+                        <!-- <button onclick="setLanguage('en')" id="btn-en" class="lang-btn active">EN</button>
+                        <button onclick="setLanguage('ar')" id="btn-ar" class="lang-btn">AR</button>
+                        <button onclick="setLanguage('ku')" id="btn-ku" class="lang-btn">KU</button> -->
+                    </div>
+                </div>
+
+                <div class="lg:hidden flex items-center">
+                    <button id="menu-toggle" class="text-valGray text-2xl"><i class="fa-solid fa-bars"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden absolute top-20 left-0 w-full bg-white flex-col p-6 space-y-4 shadow-xl lg:hidden">
+            <a href="index.html" class="font-bold uppercase text-sm" data-i18n="menu-home">Home</a>
+            <a href="index.html#about" class="font-bold uppercase text-sm" data-i18n="menu-about">About</a>
+            <a href="index.html#products" class="font-bold uppercase text-sm" data-i18n="menu-products">Products</a>
+            <a href="#projects" class="font-bold uppercase text-sm" data-i18n="menu-projects">Projects</a>
+            <a href="index.html#services-page" class="font-bold uppercase text-sm" data-i18n="menu-services-page">Services</a>
+            <a href="index.html#contact" class="font-bold uppercase text-sm" data-i18n="menu-contact">Contact</a>
+            <div class="flex space-x-4 pt-4 border-t">
+                <button onclick="setLanguage('en')" class="text-xs font-bold">EN</button>
+                <button onclick="setLanguage('ar')" class="text-xs font-bold">AR</button>
+                <button onclick="setLanguage('ku')" class="text-xs font-bold">KU</button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-bg h-64 flex items-center justify-center text-white pt-20">
+        <div class="max-w-7xl mx-auto px-6 w-full text-center">
+            <h1 class="text-4xl md:text-5xl font-brand font-black leading-tight mb-6 uppercase" data-i18n="projects-title">
+                Our Projects
+            </h1>
+        </div>
+    </header>
+
+    <section id="projects" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-white p-6 shadow-lg border-t-8 border-valYellow hover:scale-105 transition">
+                <img src="https://via.placeholder.com/300x200?text=Project+1" alt="Project 1" class="w-full h-48 object-cover mb-4">
+                <h3 class="text-xl font-bold mb-2 uppercase">Project 1</h3>
+                <p class="text-gray-500 text-sm">Description for Project 1. Add your details here.</p>
+            </div>
+            <div class="bg-white p-6 shadow-lg border-t-8 border-valGray hover:scale-105 transition">
+                <img src="https://via.placeholder.com/300x200?text=Project+2" alt="Project 2" class="w-full h-48 object-cover mb-4">
+                <h3 class="text-xl font-bold mb-2 uppercase">Project 2</h3>
+                <p class="text-gray-500 text-sm">Description for Project 2. Add your details here.</p>
+            </div>
+            <div class="bg-white p-6 shadow-lg border-t-8 border-valYellow hover:scale-105 transition">
+                <img src="https://via.placeholder.com/300x200?text=Project+3" alt="Project 3" class="w-full h-48 object-cover mb-4">
+                <h3 class="text-xl font-bold mb-2 uppercase">Project 3</h3>
+                <p class="text-gray-500 text-sm">Description for Project 3. Add your details here.</p>
+            </div>
+            <div class="bg-white p-6 shadow-lg border-t-8 border-valGray hover:scale-105 transition">
+                <img src="https://via.placeholder.com/300x200?text=Project+4" alt="Project 4" class="w-full h-48 object-cover mb-4">
+                <h3 class="text-xl font-bold mb-2 uppercase">Project 4</h3>
+                <p class="text-gray-500 text-sm">Description for Project 4. Add your details here.</p>
+            </div>
+            <div class="bg-white p-6 shadow-lg border-t-8 border-valYellow hover:scale-105 transition">
+                <img src="https://via.placeholder.com/300x200?text=Project+5" alt="Project 5" class="w-full h-48 object-cover mb-4">
+                <h3 class="text-xl font-bold mb-2 uppercase">Project 5</h3>
+                <p class="text-gray-500 text-sm">Description for Project 5. Add your details here.</p>
+            </div>
+            <div class="bg-white p-6 shadow-lg border-t-8 border-valGray hover:scale-105 transition">
+                <img src="https://via.placeholder.com/300x200?text=Project+6" alt="Project 6" class="w-full h-48 object-cover mb-4">
+                <h3 class="text-xl font-bold mb-2 uppercase">Project 6</h3>
+                <p class="text-gray-500 text-sm">Description for Project 6. Add your details here.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-valDark text-white pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-3 gap-16 border-b border-gray-700 pb-16">
+            <div>
+                <div class="flex items-center space-x-3 mb-6">
+                    <img src="https://val-company.com/vls1.png" alt="Logo" class="h-10">
+                    <span class="text-2xl font-brand font-black">VAL Company</span>
+                </div>
+                <p class="text-gray-400 text-sm">the main agent for Dabin Cement. Building the future of Iraq with strength and vision.</p>
+            </div>
+
+            <div>
+                <h4 class="text-valYellow font-bold uppercase tracking-widest mb-8 text-xs">Direct Contact</h4>
+                <div class="space-y-4 text-sm font-medium">
+                    <p class="flex items-start"><i class="fa-solid fa-phone mt-1 mr-4 text-valYellow"></i> + 964 750 174 1432</p>
+                    <p class="flex items-start"><i class="fa-solid fa-phone mt-1 mr-4 text-valYellow"></i> + 964 770 036 3020</p>
+                    <p class="flex items-start"><i class="fa-solid fa-phone mt-1 mr-4 text-valYellow"></i> + 964 786 287 4849</p>
+                    <p class="flex items-center"><i class="fa-solid fa-envelope mr-4 text-valYellow"></i> info@val-company.com</p>
+                    <p class="flex items-start"><i class="fa-solid fa-location-dot mt-1 mr-4 text-valYellow"></i> Office No. 1, 14th Floor, T4 Tower, Empire World Business Center</p>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="text-valYellow font-bold uppercase tracking-widest mb-8 text-xs">Social Presence</h4>
+                <div class="flex space-x-6 text-2xl">
+                    <a href="https://www.facebook.com/Val.company.iq" class="hover:text-valYellow transition"><i class="fab fa-facebook"></i></a>
+                    <a href="https://wa.me/7501741432" class="hover:text-valYellow transition"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.instagram.com/val_company_" class="hover:text-valYellow transition"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center pt-10 text-[10px] text-gray-500 uppercase tracking-[0.4em]">
+            &copy; 2026 VAL Company | Official Agent for Dabin Cement
+        </div>
+    </footer>
+
+    <script>
+        // Menu Toggle
+        const menuBtn = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        });
+
+        // Language Engine
+        const trans = {
+            'en': {
+                'nav-sub': 'the main agent for Dabin Cement',
+                'menu-home': 'Home', 'menu-about': 'About', 'menu-products': 'Products', 'menu-projects': 'Projects', 'menu-services-page': 'Services', 'menu-contact': 'Contact',
+                'projects-title': 'Our Projects'
+            },
+            'ar': {
+                'nav-sub': 'الوكيل الرئيسي لإسمنت دابين',
+                'menu-home': 'الرئيسية', 'menu-about': 'من نحن', 'menu-products': 'المنتجات', 'menu-projects': 'المشاريع', 'menu-services-page': 'الخدمات', 'menu-contact': 'اتصل بنا',
+                'projects-title': 'مشاريعنا'
+            },
+            'ku': {
+                'nav-sub': 'بریکاری سەرەکی چیمەنتۆی دابین',
+                'menu-home': 'سەرەتا', 'menu-about': 'دەربارە', 'menu-products': 'بەرهەمکان', 'menu-projects': 'پڕۆژەکان', 'menu-services-page': 'خزمەتگوزاری', 'menu-contact': 'پەیوەندی',
+                'projects-title': 'پڕۆژەکانیمان'
+            }
+        };
+
+        function setLanguage(lang) {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                el.innerText = trans[lang][key];
+            });
+            if (lang === 'ar' || lang === 'ku') {
+                document.body.classList.add('rtl');
+                document.documentElement.setAttribute('dir', 'rtl');
+            } else {
+                document.body.classList.remove('rtl');
+                document.documentElement.setAttribute('dir', 'ltr');
+            }
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(`btn-${lang}`).classList.add('active');
+            mobileMenu.classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
