@@ -14,12 +14,12 @@
             theme: {
                 extend: {
                     colors: {
-                        valYellow: '#F2D26D', // Machinery Yellow
-                        valGray: '#474747',   // Concrete Gray
+                        valYellow: '#F2D26D',
+                        valGray: '#474747',
                         valDark: '#1A1A1A',
                     },
                     fontFamily: {
-                        'brand': ['Eras ITC', 'Montserrat', 'sans-serif'], // Primary Brand Font
+                        'brand': ['Eras ITC', 'Montserrat', 'sans-serif'],
                         'body': ['Montserrat', 'Noto Sans Arabic', 'sans-serif'],
                     }
                 }
@@ -30,27 +30,13 @@
     <style>
         html { scroll-behavior: smooth; }
         body.rtl { direction: rtl; font-family: 'Noto Sans Arabic', 'Montserrat', sans-serif; }
-
-        /* Fixed Background Hero */
-        .hero-bg {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://val-company.com/vl0.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-
-        .video-player {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-        }
-
+        .hero-bg { background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('https://val-company.com/hero0.jpg'); background-size: cover; background-position: center; background-attachment: fixed; }
+        .video-player { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
         .lang-btn.active { color: #F2D26D; font-weight: bold; border-bottom: 2px solid #F2D26D; }
-
-        @media (max-width: 768px) {
-            .hero-bg { background-attachment: scroll; }
-        }
+        @media (max-width: 768px) { .hero-bg { background-attachment: scroll; } }
+        .expandable-content { max-height: 100px; overflow: hidden; transition: max-height 0.3s ease; }
+        .expandable-content.expanded { max-height: 1000px; }
+        .expand-btn { color: #F2D26D; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body class="bg-white font-body text-gray-800">
@@ -69,14 +55,20 @@
                 <div class="hidden lg:flex items-center space-x-8 text-xs font-black uppercase tracking-widest text-valGray">
                     <a href="#home" class="hover:text-valYellow transition" data-i18n="menu-home">Home</a>
                     <a href="#about" class="hover:text-valYellow transition" data-i18n="menu-about">About</a>
-                    <a href="#reels" class="hover:text-valYellow transition" data-i18n="menu-reels">Reels</a>
-                    <a href="#services" class="hover:text-valYellow transition" data-i18n="menu-services">Services</a>
+                    <a href="#products" class="hover:text-valYellow transition" data-i18n="menu-products">Products</a>
+                    <a href="#projects" class="hover:text-valYellow transition" data-i18n="menu-projects">Projects</a>
+                    <div class="relative group">
+                        <a href="#more" class="hover:text-valYellow transition" data-i18n="menu-more">More</a>
+                        <div class="absolute hidden group-hover:block bg-white shadow-lg rounded-lg p-4 w-48 z-50">
+                            <a href="#services-page" class="block px-4 py-2 hover:bg-gray-100" data-i18n="menu-services-page">Services</a>
+                            <a href="#coclusion" class="block px-4 py-2 hover:bg-gray-100" data-i18n="menu-conclusion">Conclusion</a>
+                        </div>
+                    </div>
                     <a href="#contact" class="bg-valGray text-white px-5 py-2 rounded hover:bg-valYellow transition" data-i18n="menu-contact">Contact</a>
-
                     <div class="flex items-center space-x-3 border-l pl-6 border-gray-200">
-                        <button onclick="setLanguage('en')" id="btn-en" class="lang-btn active">EN</button>
+                        <!-- <button onclick="setLanguage('en')" id="btn-en" class="lang-btn active">EN</button>
                         <button onclick="setLanguage('ar')" id="btn-ar" class="lang-btn">AR</button>
-                        <button onclick="setLanguage('ku')" id="btn-ku" class="lang-btn">KU</button>
+                        <button onclick="setLanguage('ku')" id="btn-ku" class="lang-btn">KU</button> -->
                     </div>
                 </div>
 
@@ -89,8 +81,10 @@
         <div id="mobile-menu" class="hidden absolute top-20 left-0 w-full bg-white flex-col p-6 space-y-4 shadow-xl lg:hidden">
             <a href="#home" class="font-bold uppercase text-sm" data-i18n="menu-home">Home</a>
             <a href="#about" class="font-bold uppercase text-sm" data-i18n="menu-about">About</a>
-            <a href="#reels" class="font-bold uppercase text-sm" data-i18n="menu-reels">Reels</a>
-            <a href="#services" class="font-bold uppercase text-sm" data-i18n="menu-services">Services</a>
+            <a href="#products" class="font-bold uppercase text-sm" data-i18n="menu-products">Products</a>
+            <a href="#projects" class="font-bold uppercase text-sm" data-i18n="menu-projects">Projects</a>
+            <a href="#services-page" class="font-bold uppercase text-sm" data-i18n="menu-services-page">Services</a>
+            <a href="#coclusion" class="font-bold uppercase text-sm" data-i18n="menu-conclusion">Conclusion</a>
             <a href="#contact" class="font-bold uppercase text-sm" data-i18n="menu-contact">Contact</a>
             <div class="flex space-x-4 pt-4 border-t">
                 <button onclick="setLanguage('en')" class="text-xs font-bold">EN</button>
@@ -133,42 +127,328 @@
         </div>
     </section>
 
-    <section id="services" class="py-24 bg-gray-50">
+    <section id="products" class="py-24 bg-gray-50">
         <div class="max-w-7xl mx-auto px-6 text-center mb-16">
-            <h2 class="text-4xl font-brand font-black text-valGray uppercase" data-i18n="menu-services">Our Products</h2>
+            <h2 class="text-4xl font-brand font-black text-valGray uppercase" data-i18n="menu-products">Our Products</h2>
         </div>
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="bg-white p-10 shadow-lg border-t-8 border-valYellow hover:scale-105 transition">
-                <i class="fas fa-industry text-4xl text-valYellow mb-6"></i>
-                <h3 class="text-xl font-bold mb-4 uppercase">Super Cement</h3>
-                <p class="text-gray-500 text-sm">High-quality cement for superior strength and durability in all construction projects.</p>
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="bg-white p-6 shadow-lg border-t-8 border-valYellow hover:scale-105 transition">
+                <img src="https://ikghd.site/rer/val/p1.png" alt="Product 1" class="w-full h-48 object-cover mb-4">
+                <h3 class="text-xl font-bold mb-2 uppercase">Ordinary Portland Cement (OPC)</h3>
+                <p class="text-gray-500 text-sm expandable-content" id="product1-content">
+                    Ordinary Portland Cement (OPC) is the most reliable and widely used binding agent in the construction industry. It is manufactured in strict accordance with international standards, such as ASTM C150 (Type I) or EN 197-1, ensuring superior performance across diverse structural and architectural applications.
+                </p>
+                <span class="expand-btn" onclick="toggleExpand('product1-content', 'product1-btn')">Read More</span>
+                <div class="hidden" id="product1-full-content">
+                    <p class="text-gray-500 text-sm">
+                        Technical Specifications & Features:
+                        * Structural Strength: Characterized by a high rate of compressive strength development, making it ideal for structural elements subjected to heavy loads.
+                        * Setting Time: Engineered with balanced initial and final setting times, providing engineers with the necessary flexibility for mixing, transportation, and placement.
+                        * Durability: Offers excellent resistance to weathering and environmental factors, ensuring the long-term integrity of concrete structures.
+                        * Compatibility: Highly compatible with various chemical admixtures to enhance workability, flow, or water reduction.
+                        Product Applications:
+                        * All reinforced concrete works, including bridges, columns, and slabs.
+                        * Ready-mix concrete production.
+                        * Precast concrete units and masonry products.
+                        * High-quality finishing works and cement mortar.
+                    </p>
+                </div>
             </div>
-            <div class="bg-white p-10 shadow-lg border-t-8 border-valGray hover:scale-105 transition">
-                <i class="fas fa-hard-hat text-4xl text-valGray mb-6"></i>
-                <h3 class="text-xl font-bold mb-4 uppercase">Super Cement OPC</h3>
-                <p class="text-gray-500 text-sm">Ordinary Portland Cement (OPC) for reliable and consistent performance in general construction.</p>
+            <div class="bg-white p-6 shadow-lg border-t-8 border-valGray hover:scale-105 transition">
+                <img src="https://ikghd.site/rer/val/p2.png" alt="Product 2" class="w-full h-48 object-cover mb-4">
+                <h3 class="text-xl font-bold mb-2 uppercase">Super Block Cement</h3>
+                <p class="text-gray-500 text-sm expandable-content" id="product2-content">
+                    Super Block Cement is a specialized, high-performance product engineered specifically for the masonry and precast industry.
+                </p>
+                <span class="expand-btn" onclick="toggleExpand('product2-content', 'product2-btn')">Read More</span>
+                <div class="hidden" id="product2-full-content">
+                    <p class="text-gray-500 text-sm">
+                        Its unique formulation is optimized for automatic and semi-automatic production lines, ensuring exceptional quality and cost-efficiency.
+                        Technical Specifications & Features:
+                        * High Early Strength: Developed to provide rapid hardening, allowing for faster demolding and increased daily production turnover.
+                        * Reduced Wastage: Exceptional bonding properties significantly minimize breakage and crumbling during handling and transportation.
+                        * Fine Finishes: The optimized fineness ensures smooth surfaces, sharp edges, and uniform textures for blocks and curbstones.
+                        * Mix Efficiency: Provides excellent coating of aggregates, resulting in a consistent and homogeneous mix with optimized cement content.
+                        Product Applications:
+                        * Production of all types of masonry blocks (Hollow, Solid, and Insulated).
+                        * Manufacturing of Interlocking tiles and paving stones.
+                        * Production of Curbstones and unreinforced precast elements.
+                        * All cement-based products requiring short curing cycles.
+                    </p>
+                </div>
             </div>
-            <div class="bg-white p-10 shadow-lg border-t-8 border-valYellow hover:scale-105 transition">
-                <i class="fas fa-shield-alt text-4xl text-valYellow mb-6"></i>
-                <h3 class="text-xl font-bold mb-4 uppercase">Sulfate Resistant</h3>
-                <p class="text-gray-500 text-sm">Specially engineered for high-sulfate soil foundations and harsh environments.</p>
+            <div class="bg-white p-6 shadow-lg border-t-8 border-valYellow hover:scale-105 transition">
+                <img src="https://ikghd.site/rer/val/p3.png" alt="Product 3" class="w-full h-48 object-cover mb-4">
+                <h3 class="text-xl font-bold mb-2 uppercase">Bagged Ordinary Portland Cement (OPC)</h3>
+                <p class="text-gray-500 text-sm expandable-content" id="product3-content">
+                    Our Bagged OPC is the gold standard for flexibility and reliability in the construction sector.
+                </p>
+                <span class="expand-btn" onclick="toggleExpand('product3-content', 'product3-btn')">Read More</span>
+                <div class="hidden" id="product3-full-content">
+                    <p class="text-gray-500 text-sm">
+                        Packed under stringent quality control measures, it ensures that the cement retains its full chemical and physical integrity from the production line to the project site.
+                        Technical Specifications & Features:
+                        * Premium Packaging: Encased in high-strength, multi-ply, moisture-resistant paper or laminated PP bags, designed to withstand rigorous handling and extend shelf life.
+                        * Consistency: Delivers uniform fineness and color across every bag, ensuring consistent performance for concrete and mortar mixes.
+                        * Operational Flexibility: The ideal solution for medium-to-small scale projects and sites with restricted access for bulk tankers.
+                        * High Workability: Engineered for optimal setting times and high early strength, facilitating both manual and mechanical mixing processes.
+                        Product Applications:
+                        * General reinforced concrete structures (Slabs, Columns, Foundations).
+                        * Masonry, plastering, and tiling mortars.
+                        * Renovation, repair, and maintenance projects.
+                        * General infrastructure and pavement works.
+                    </p>
+                </div>
+            </div>
+            <div class="bg-white p-6 shadow-lg border-t-8 border-valGray hover:scale-105 transition">
+                <img src="https://ikghd.site/rer/val/p4.png" alt="Product 4" class="w-full h-48 object-cover mb-4">
+                <h3 class="text-xl font-bold mb-2 uppercase">Bagged Portland Composite Cement (CEM II)</h3>
+                <p class="text-gray-500 text-sm expandable-content" id="product4-content">
+                    CEM II is an advanced structural cement engineered by inter-grinding Portland clinker with carefully selected mineral additives or pozzolanas.
+                </p>
+                <span class="expand-btn" onclick="toggleExpand('product4-content', 'product4-btn')">Read More</span>
+                <div class="hidden" id="product4-full-content">
+                    <p class="text-gray-500 text-sm">
+                        It offers a perfect synergy between high durability, superior workability, and eco-friendly construction.
+                        Technical Specifications & Features:
+                        * Superior Workability: Its fine particle distribution ensures a smoother mix, making it easier to handle and reducing voids and surface cracks.
+                        * Low Heat of Hydration: Produces less heat during the setting process, making it ideal for hot weather concreting and minimizing thermal cracking.
+                        * Enhanced Durability: The composite components provide increased resistance to chemical attacks and reduce permeability, protecting the embedded reinforcement.
+                        * Premium Packaging: Supplied in moisture-proof, high-durability bags to maintain optimal freshness and performance during storage.
+                        Product Applications:
+                        * Internal and external plastering (rendering) and architectural finishes.
+                        * Masonry works, bricklaying, and tile adhesives.
+                        * Mass concrete and non-structural elements.
+                        * General paving and floor screeds.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
+    <section id="projects" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6 text-center mb-16">
+            <h2 class="text-4xl font-brand font-black text-valGray uppercase" data-i18n="menu-projects">Our Projects</h2>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-white p-6 shadow-lg border-t-8 border-valYellow hover:scale-105 transition">
+                <img src="https://ikghd.site/rer/val/pj1.png" alt="Project 1" class="w-full h-48 object-cover mb-4">
+                <h3 class="text-xl font-bold mb-2 uppercase">Qushtappah Silo</h3>
+                <p class="text-gray-500 text-sm expandable-content" id="project1-content">
+                    Description for Project 1. Add your details here.
+                </p>
+                <span class="expand-btn" onclick="toggleExpand('project1-content', 'project1-btn')">Read More</span>
+                <div class="hidden" id="project1-full-content">
+                    <p class="text-gray-500 text-sm">
+                        Full description for Project 1. Add your detailed information here.
+                    </p>
+                </div>
+            </div>
+            <div class="bg-white p-6 shadow-lg border-t-8 border-valGray hover:scale-105 transition">
+                <img src="https://ikghd.site/rer/val/pj2.png" alt="Project 2" class="w-full h-48 object-cover mb-4">
+                <h3 class="text-xl font-bold mb-2 uppercase">Chamchamal Silo</h3>
+                <p class="text-gray-500 text-sm expandable-content" id="project2-content">
+                    Description for Project 2. Add your details here.
+                </p>
+                <span class="expand-btn" onclick="toggleExpand('project2-content', 'project2-btn')">Read More</span>
+                <div class="hidden" id="project2-full-content">
+                    <p class="text-gray-500 text-sm">
+                        Full description for Project 2. Add your detailed information here.
+                    </p>
+                </div>
+            </div>
+            <div class="bg-white p-6 shadow-lg border-t-8 border-valYellow hover:scale-105 transition">
+                <img src="https://ikghd.site/rer/val/pj3.png" alt="Project 3" class="w-full h-48 object-cover mb-4">
+                <h3 class="text-xl font-bold mb-2 uppercase">Kalar Project</h3>
+                <p class="text-gray-500 text-sm expandable-content" id="project3-content">
+                    Description for Project 3. Add your details here.
+                </p>
+                <span class="expand-btn" onclick="toggleExpand('project3-content', 'project3-btn')">Read More</span>
+                <div class="hidden" id="project3-full-content">
+                    <p class="text-gray-500 text-sm">
+                        Full description for Project 3. Add your detailed information here.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-12">
+            <a href="projects.html" class="bg-valYellow text-valDark px-10 py-4 font-black uppercase text-sm hover:bg-white transition shadow-lg" data-i18n="view-all-projects">View All Projects</a>
+        </div>
+    </section>
+
     <section id="about" class="py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+          <div>
+              <h2 class="text-4xl font-brand font-black text-valGray mb-8 uppercase" data-i18n="who-we-are-title">WHO WE ARE</h2>
+              <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                  Val Company, established in 2024, is one of Iraq’s fastest-growing cement firms, known for its quality, speed, and professionalism. It operates as a proud part of Baroque Company, a leading construction and contracting firm founded in 2015.
+              </p>
+              <p class="text-lg text-gray-600 leading-relaxed">
+                  Both companies are owned and led by Mr. Dawan Omar Salih, whose vision, expertise, and commitment to excellence have shaped their growth and success.
+              </p>
+          </div>
+          <div class="flex justify-center">
+              <img src="https://ikghd.site/rer/val/wwr.png" alt="VAL Logo" class="w-64 h-auto">
+          </div>
+      </div>
+    </section>
+
+    <section id="services-page" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6 text-center mb-16">
+            <h2 class="text-4xl font-brand font-black text-valGray uppercase" data-i18n="menu-services-page">Our Services</h2>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-white p-10 shadow-lg border-t-8 border-valYellow hover:scale-105 transition">
+                <i class="fas fa-industry text-4xl text-valYellow mb-6"></i>
+                <h3 class="text-xl font-bold mb-4 uppercase">Consultation</h3>
+                <p class="text-gray-500 text-sm">Expert advice for your construction needs.</p>
+            </div>
+            <div class="bg-white p-10 shadow-lg border-t-8 border-valGray hover:scale-105 transition">
+                <i class="fas fa-hard-hat text-4xl text-valGray mb-6"></i>
+                <h3 class="text-xl font-bold mb-4 uppercase">Project Management</h3>
+                <p class="text-gray-500 text-sm">End-to-end management for your projects.</p>
+            </div>
+            <div class="bg-white p-10 shadow-lg border-t-8 border-valYellow hover:scale-105 transition">
+                <i class="fas fa-shield-alt text-4xl text-valYellow mb-6"></i>
+                <h3 class="text-xl font-bold mb-4 uppercase">Quality Assurance</h3>
+                <p class="text-gray-500 text-sm">Ensuring the highest standards for your projects.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Sections Start -->
+    <section id="objectives" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-brand font-black text-valGray mb-12 uppercase text-center" data-i18n="objectives-title">OUR OBJECTIVES</h2>
+            <div class="bg-white p-10 rounded-lg shadow-lg">
+                <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                    Everything we offer aims to support smooth, efficient, and successful project execution:
+                </p>
+                <ul class="list-disc pl-6 space-y-2 text-gray-600">
+                    <li>Deliver cement in the fastest timeline possible</li>
+                    <li>Maintain high and consistent product quality</li>
+                    <li>Create a professional working environment</li>
+                    <li>Foster trust and long-term collaboration</li>
+                    <li>Prevent project delays through reliable service</li>
+                    <li>Provide flexible and scalable supply solutions</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="core-values" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-brand font-black text-valGray mb-12 uppercase text-center" data-i18n="core-values-title">CORE VALUES</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-gray-50 p-8 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <span class="text-2xl font-bold text-valYellow mr-4">01</span>
+                        <h3 class="text-xl font-bold uppercase">Quality</h3>
+                    </div>
+                    <p class="text-gray-600">We deliver cement that meets strict standards and supports long-lasting structures.</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <span class="text-2xl font-bold text-valYellow mr-4">02</span>
+                        <h3 class="text-xl font-bold uppercase">Reliability</h3>
+                    </div>
+                    <p class="text-gray-600">Our delivery system ensures projects stay on schedule.</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <span class="text-2xl font-bold text-valYellow mr-4">03</span>
+                        <h3 class="text-xl font-bold uppercase">Integrity</h3>
+                    </div>
+                    <p class="text-gray-600">We operate with transparency, honesty, and full accountability.</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <span class="text-2xl font-bold text-valYellow mr-4">04</span>
+                        <h3 class="text-xl font-bold uppercase">Professionalism</h3>
+                    </div>
+                    <p class="text-gray-600">Every interaction reflects our commitment to excellence.</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <span class="text-2xl font-bold text-valYellow mr-4">05</span>
+                        <h3 class="text-xl font-bold uppercase">Efficiency</h3>
+                    </div>
+                    <p class="text-gray-600">We continuously improve to deliver faster and smarter.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="mission-vision" class="py-24 bg-gray-50">
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
             <div>
-                <h2 class="text-4xl font-brand font-black text-valGray mb-8 uppercase" data-i18n="menu-about">About Us</h2>
+                <h2 class="text-4xl font-brand font-black text-valGray mb-8 uppercase" data-i18n="mission-vision-title">OUR MISSION AND VISION</h2>
                 <p class="text-lg text-gray-600 mb-6 leading-relaxed">
-                    VAL Company is a leading provider of innovative and sustainable construction solutions. With over a decade of experience, we specialize in delivering high-quality projects on time and within budget.
+                    <strong>Our Vision:</strong> To become Iraq's most trusted, efficient, and innovative cement supplier, known for delivering quality and reliability across every project we serve.
                 </p>
                 <p class="text-lg text-gray-600 leading-relaxed">
-                    Our mission is to shape the future of construction through innovation, integrity, and professionalism. We believe in building not just structures, but lasting relationships with our clients and partners.
+                    <strong>Our Mission:</strong> To provide high-quality cement with exceptional speed and professional service, strengthening the foundations of Iraq's construction sector through trust, consistency, and strategic partnerships.
                 </p>
             </div>
             <div class="rounded-lg overflow-hidden shadow-2xl">
-                <img src="https://val-company.com/vl0.jpg" alt="Construction" class="w-full h-auto">
+                <img src="https://ikghd.site/rer/val/oms.png" alt="Mission Vision" class="w-full h-auto">
+            </div>
+        </div>
+    </section>
+
+    <section id="swot-analysis" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-brand font-black text-valGray mb-12 uppercase text-center" data-i18n="swot-title">SWOT ANALYSIS</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-gray-50 p-8 rounded-lg">
+                    <h3 class="text-2xl font-bold uppercase mb-4">Strengths</h3>
+                    <ul class="list-disc pl-6 space-y-2 text-gray-600">
+                        <li>Efficient project management and strong organizational skills.</li>
+                        <li>Consistent adherence to deadlines.</li>
+                        <li>High-quality workmanship and attention to detail.</li>
+                        <li>Extensive experience and expertise in the industry.</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-lg">
+                    <h3 class="text-2xl font-bold uppercase mb-4">Weaknesses</h3>
+                    <ul class="list-disc pl-6 space-y-2 text-gray-600">
+                        <li>Need for improved coordination in certain areas.</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-lg">
+                    <h3 class="text-2xl font-bold uppercase mb-4">Opportunities</h3>
+                    <ul class="list-disc pl-6 space-y-2 text-gray-600">
+                        <li>Expansion into new projects and sectors.</li>
+                        <li>Embracing technological advancements to enhance efficiency and productivity.</li>
+                        <li>Developing strategic partnerships and collaborations.</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-lg">
+                    <h3 class="text-2xl font-bold uppercase mb-4">Threats</h3>
+                    <ul class="list-disc pl-6 space-y-2 text-gray-600">
+                        <li>Intense competition from emerging players in the construction and contracting industry.</li>
+                        <li>Economic and market fluctuations affecting project demands.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- New Sections End -->
+
+    <section id="coclusion" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+            <div>
+              <h2 class="text-4xl font-brand font-black text-valGray mb-8 uppercase" data-i18n="menu-conclusion">Conclusion</h2>
+              <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                Val Company is proud of its rapid growth and proven impact in the cement
+                industry. With our professionalism, dedication, and expanding expertise, we
+                are ready to support your projects and contribute to their success.
+                We look forward to building long-term collaborations grounded in trust,
+                quality, and reliability.
+              </p>
+            </div>
+            <div class="rounded-lg overflow-hidden shadow-2xl">
+                <img src="https://ikghd.site/rer/val/ccl.png" alt="Mission Vision" class="w-full h-auto">
             </div>
         </div>
     </section>
@@ -186,7 +466,9 @@
             <div>
                 <h4 class="text-valYellow font-bold uppercase tracking-widest mb-8 text-xs">Direct Contact</h4>
                 <div class="space-y-4 text-sm font-medium">
-                    <p class="flex items-start"><i class="fa-solid fa-phone mt-1 mr-4 text-valYellow"></i> + 964 750 174 1432 | 0770 036 3020 | 0786 287 4849</p>
+                    <p class="flex items-start"><i class="fa-solid fa-phone mt-1 mr-4 text-valYellow"></i> + 964 750 174 1432</p>
+                    <p class="flex items-start"><i class="fa-solid fa-phone mt-1 mr-4 text-valYellow"></i> + 964 770 036 3020</p>
+                    <p class="flex items-start"><i class="fa-solid fa-phone mt-1 mr-4 text-valYellow"></i> + 964 786 287 4849</p>
                     <p class="flex items-center"><i class="fa-solid fa-envelope mr-4 text-valYellow"></i> info@val-company.com</p>
                     <p class="flex items-start"><i class="fa-solid fa-location-dot mt-1 mr-4 text-valYellow"></i> Office No. 1, 14th Floor, T4 Tower, Empire World Business Center</p>
                 </div>
@@ -215,25 +497,52 @@
             mobileMenu.classList.toggle('flex');
         });
 
+        // Expandable Content Toggle
+        function toggleExpand(contentId, btnId) {
+            const content = document.getElementById(contentId);
+            const btn = document.getElementById(btnId);
+            content.classList.toggle('expanded');
+            if (content.classList.contains('expanded')) {
+                btn.textContent = 'Read Less';
+            } else {
+                btn.textContent = 'Read More';
+            }
+        }
+
         // Language Engine
         const trans = {
             'en': {
                 'nav-sub': 'the main agent for Dabin Cement',
-                'menu-home': 'Home', 'menu-about': 'About', 'menu-reels': 'Reels', 'menu-services': 'Services', 'menu-contact': 'Contact',
+                'menu-home': 'Home', 'menu-about': 'About', 'menu-reels': 'Reels', 'menu-products': 'Products', 'menu-projects': 'Projects', 'menu-services-page': 'Services', 'menu-conclusion': 'Conclusion', 'menu-contact': 'Contact', 'view-all-projects': 'View All Projects',
                 'hero-title': 'Building with strength, shaping with vision.',
-                'hero-desc': 'Excellence in Cements for construction. The official representative of Dabin Cement.'
+                'hero-desc': 'Excellence in Cements for construction. The official representative of Dabin Cement.',
+                'who-we-are-title': 'WHO WE ARE',
+                'objectives-title': 'OUR OBJECTIVES',
+                'core-values-title': 'CORE VALUES',
+                'mission-vision-title': 'OUR MISSION AND VISION',
+                'swot-title': 'SWOT ANALYSIS'
             },
             'ar': {
                 'nav-sub': 'الوكيل الرئيسي لإسمنت دابين',
-                'menu-home': 'الرئيسية', 'menu-about': 'من نحن', 'menu-reels': 'الفيديوهات', 'menu-services': 'الخدمات', 'menu-contact': 'اتصل بنا',
+                'menu-home': 'الرئيسية', 'menu-about': 'من نحن', 'menu-reels': 'الفيديوهات', 'menu-products': 'المنتجات', 'menu-projects': 'المشاريع', 'menu-services-page': 'الخدمات', 'menu-conclusion': 'الختام', 'menu-contact': 'اتصل بنا', 'view-all-projects': 'عرض جميع المشاريع',
                 'hero-title': 'نبني بقوة، ونشكل برؤية.',
-                'hero-desc': 'التميز في الإسمنت لأغراض البناء. الممثل الرسمي لإسمنت دابين.'
+                'hero-desc': 'التميز في الإسمنت لأغراض البناء. الممثل الرسمي لإسمنت دابين.',
+                'who-we-are-title': 'من نحن',
+                'objectives-title': 'أهدافنا',
+                'core-values-title': 'القيم الأساسية',
+                'mission-vision-title': 'رؤيتنا ورسالتنا',
+                'swot-title': 'تحليل SWOT'
             },
             'ku': {
                 'nav-sub': 'بریکاری سەرەکی چیمەنتۆی دابین',
-                'menu-home': 'سەرەتا', 'menu-about': 'دەربارە', 'menu-reels': 'ڤیدیۆکان', 'menu-services': 'خزمەتگوزاری', 'menu-contact': 'پەیوەندی',
+                'menu-home': 'سەرەتا', 'menu-about': 'دەربارە', 'menu-reels': 'ڤیدیۆکان', 'menu-products': 'بەرهەمکان', 'menu-projects': 'پڕۆژەکان', 'menu-services-page': 'خزمەتگوزاری', 'menu-conclusion': 'کۆتایی', 'menu-contact': 'پەیوەندی', 'view-all-projects': 'پێشاندانی هەموو پڕۆژەکان',
                 'hero-title': 'بە هێزەوە دەبنیات دەنێین، بە بینینەوە شێوە دەدەین.',
-                'hero-desc': 'ناوازەیی لە چیمەنتۆ بۆ بیناسازی. نوێنەری فەرمی چیمەنتۆی دابین.'
+                'hero-desc': 'ناوازەیی لە چیمەنتۆ بۆ بیناسازی. نوێنەری فەرمی چیمەنتۆی دابین.',
+                'who-we-are-title': 'ئەوەیەمان',
+                'objectives-title': 'ئەرمەکانیمان',
+                'core-values-title': 'نەرخی سەرەکی',
+                'mission-vision-title': 'بەرەوەرە و دەستپێکیمان',
+                'swot-title': 'شوێنەکانی SWOT'
             }
         };
 
