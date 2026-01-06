@@ -33,6 +33,52 @@
         .hero-bg { background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('https://val-company.com/hero0.jpg'); background-size: cover; background-position: center; background-attachment: fixed; }
         .lang-btn.active { color: #F2D26D; font-weight: bold; border-bottom: 2px solid #F2D26D; }
         @media (max-width: 768px) { .hero-bg { background-attachment: scroll; } }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        .modal-content {
+            background-color: white;
+            margin: 2% auto;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 900px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        .modal-images {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 10px 0;
+            scrollbar-width: thin;
+        }
+        .modal-images img {
+            height: 200px;
+            flex: 0 0 auto;
+        }
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #474747;
+        }
+        .modal-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body class="bg-gray-50 font-body text-gray-800">
@@ -93,33 +139,39 @@
 
     <section id="projects" class="py-24 bg-gray-50">
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="bg-white p-6 shadow-lg border-t-8 border-valYellow hover:scale-105 transition">
-                <img src="https://via.placeholder.com/300x200?text=Project+1" alt="Project 1" class="w-full h-48 object-cover mb-4">
+            <!-- Project 1 -->
+            <div class="bg-white p-6 shadow-lg border-t-8 border-valYellow hover:scale-105 transition" onclick="openProjectModal('Project 1', ['https://via.placeholder.com/300x200?text=Project+1+Image+1', 'https://via.placeholder.com/300x200?text=Project+1+Image+2', 'https://via.placeholder.com/300x200?text=Project+1+Image+3'], 'Full description for Project 1. Add your detailed information here.')">
+                <img src="https://val-company.com/pj1.png" alt="Project 1" class="w-full h-48 object-cover mb-4">
                 <h3 class="text-xl font-bold mb-2 uppercase">Project 1</h3>
                 <p class="text-gray-500 text-sm">Description for Project 1. Add your details here.</p>
             </div>
-            <div class="bg-white p-6 shadow-lg border-t-8 border-valGray hover:scale-105 transition">
-                <img src="https://via.placeholder.com/300x200?text=Project+2" alt="Project 2" class="w-full h-48 object-cover mb-4">
+            <!-- Project 2 -->
+            <div class="bg-white p-6 shadow-lg border-t-8 border-valGray hover:scale-105 transition" onclick="openProjectModal('Project 2', ['https://via.placeholder.com/300x200?text=Project+2+Image+1', 'https://via.placeholder.com/300x200?text=Project+2+Image+2'], 'Full description for Project 2. Add your detailed information here.')">
+                <img src="https://val-company.com/pj2.png" alt="Project 2" class="w-full h-48 object-cover mb-4">
                 <h3 class="text-xl font-bold mb-2 uppercase">Project 2</h3>
                 <p class="text-gray-500 text-sm">Description for Project 2. Add your details here.</p>
             </div>
-            <div class="bg-white p-6 shadow-lg border-t-8 border-valYellow hover:scale-105 transition">
-                <img src="https://via.placeholder.com/300x200?text=Project+3" alt="Project 3" class="w-full h-48 object-cover mb-4">
+            <!-- Project 3 -->
+            <div class="bg-white p-6 shadow-lg border-t-8 border-valYellow hover:scale-105 transition" onclick="openProjectModal('Project 3', ['https://via.placeholder.com/300x200?text=Project+3+Image+1', 'https://via.placeholder.com/300x200?text=Project+3+Image+2', 'https://via.placeholder.com/300x200?text=Project+3+Image+3'], 'Full description for Project 3. Add your detailed information here.')">
+                <img src="https://val-company.com/pj3.png" alt="Project 3" class="w-full h-48 object-cover mb-4">
                 <h3 class="text-xl font-bold mb-2 uppercase">Project 3</h3>
                 <p class="text-gray-500 text-sm">Description for Project 3. Add your details here.</p>
             </div>
-            <div class="bg-white p-6 shadow-lg border-t-8 border-valGray hover:scale-105 transition">
-                <img src="https://via.placeholder.com/300x200?text=Project+4" alt="Project 4" class="w-full h-48 object-cover mb-4">
+            <!-- Project 4 -->
+            <div class="bg-white p-6 shadow-lg border-t-8 border-valGray hover:scale-105 transition" onclick="openProjectModal('Project 4', ['https://via.placeholder.com/300x200?text=Project+4+Image+1', 'https://via.placeholder.com/300x200?text=Project+4+Image+2'], 'Full description for Project 4. Add your detailed information here.')">
+                <img src="https://val-company.com/tanj.png" alt="Project 4" class="w-full h-48 object-cover mb-4">
                 <h3 class="text-xl font-bold mb-2 uppercase">Project 4</h3>
                 <p class="text-gray-500 text-sm">Description for Project 4. Add your details here.</p>
             </div>
-            <div class="bg-white p-6 shadow-lg border-t-8 border-valYellow hover:scale-105 transition">
-                <img src="https://via.placeholder.com/300x200?text=Project+5" alt="Project 5" class="w-full h-48 object-cover mb-4">
+            <!-- Project 5 -->
+            <div class="bg-white p-6 shadow-lg border-t-8 border-valYellow hover:scale-105 transition" onclick="openProjectModal('Project 5', ['https://via.placeholder.com/300x200?text=Project+5+Image+1', 'https://via.placeholder.com/300x200?text=Project+5+Image+2', 'https://via.placeholder.com/300x200?text=Project+5+Image+3'], 'Full description for Project 5. Add your detailed information here.')">
+                <img src="https://val-company.com/kalar.png" alt="Project 5" class="w-full h-48 object-cover mb-4">
                 <h3 class="text-xl font-bold mb-2 uppercase">Project 5</h3>
                 <p class="text-gray-500 text-sm">Description for Project 5. Add your details here.</p>
             </div>
-            <div class="bg-white p-6 shadow-lg border-t-8 border-valGray hover:scale-105 transition">
-                <img src="https://via.placeholder.com/300x200?text=Project+6" alt="Project 6" class="w-full h-48 object-cover mb-4">
+            <!-- Project 6 -->
+            <div class="bg-white p-6 shadow-lg border-t-8 border-valGray hover:scale-105 transition" onclick="openProjectModal('Project 6', ['https://via.placeholder.com/300x200?text=Project+6+Image+1', 'https://via.placeholder.com/300x200?text=Project+6+Image+2'], 'Full description for Project 6. Add your detailed information here.')">
+                <img src="https://val-company.com/akre.png" alt="Project 6" class="w-full h-48 object-cover mb-4">
                 <h3 class="text-xl font-bold mb-2 uppercase">Project 6</h3>
                 <p class="text-gray-500 text-sm">Description for Project 6. Add your details here.</p>
             </div>
@@ -161,6 +213,16 @@
         </div>
     </footer>
 
+    <!-- Project Modal -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content relative">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title" class="modal-title text-2xl font-bold uppercase"></h2>
+            <div id="modal-images" class="modal-images"></div>
+            <div id="modal-details" class="text-gray-600 mt-4"></div>
+        </div>
+    </div>
+
     <script>
         // Menu Toggle
         const menuBtn = document.getElementById('menu-toggle');
@@ -169,6 +231,33 @@
             mobileMenu.classList.toggle('hidden');
             mobileMenu.classList.toggle('flex');
         });
+
+        // Modal Functions
+        function openProjectModal(title, images, details) {
+            const modal = document.getElementById('project-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalImages = document.getElementById('modal-images');
+            const modalDetails = document.getElementById('modal-details');
+
+            modalTitle.textContent = title;
+            modalImages.innerHTML = images.map(img => `<img src="${img}" alt="${title}">`).join('');
+            modalDetails.textContent = details;
+
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('project-modal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal if clicked outside
+        window.onclick = (event) => {
+            const modal = document.getElementById('project-modal');
+            if (event.target === modal) closeModal();
+        };
 
         // Language Engine
         const trans = {
