@@ -38,6 +38,7 @@
         .expandable-content.expanded { max-height: 1000px; }
         .expand-btn { color: #F2D26D; cursor: pointer; font-weight: bold; }
     </style>
+
 </head>
 <body class="bg-white font-body text-gray-800">
 
@@ -133,7 +134,7 @@
         </div>
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div class="bg-white p-6 shadow-lg border-t-8 border-valYellow hover:scale-105 transition">
-                <img src="https://val-company.com/p1.png" alt="Product 1" class="w-full h-48 object-cover mb-4">
+                <img src="https://val-company.com/oms.png" alt="Product 1" class="w-full h-48 object-cover mb-4">
                 <h3 class="text-xl font-bold mb-2 uppercase">Ordinary Portland Cement (OPC)</h3>
                 <p class="text-gray-500 text-sm expandable-content" id="product1-content">
                     Ordinary Portland Cement (OPC) is the most reliable and widely used binding agent in the construction industry. It is manufactured in strict accordance with international standards, such as ASTM C150 (Type I) or EN 197-1, ensuring superior performance across diverse structural and architectural applications.
@@ -178,7 +179,7 @@
                 </div>
             </div>
             <div class="bg-white p-6 shadow-lg border-t-8 border-valYellow hover:scale-105 transition">
-                <img src="https://val-company.com/p3.png" alt="Product 3" class="w-full h-48 object-cover mb-4">
+                <img src="https://val-company.com/p1.png" alt="Product 3" class="w-full h-48 object-cover mb-4">
                 <h3 class="text-xl font-bold mb-2 uppercase">Bagged Ordinary Portland Cement (OPC)</h3>
                 <p class="text-gray-500 text-sm expandable-content" id="product3-content">
                     Our Bagged OPC is the gold standard for flexibility and reliability in the construction sector.
@@ -201,7 +202,7 @@
                 </div>
             </div>
             <div class="bg-white p-6 shadow-lg border-t-8 border-valGray hover:scale-105 transition">
-                <img src="https://val-company.com/p4.png" alt="Product 4" class="w-full h-48 object-cover mb-4">
+                <img src="https://val-company.com/pc4.png" alt="Product 4" class="w-full h-48 object-cover mb-4">
                 <h3 class="text-xl font-bold mb-2 uppercase">Bagged Portland Composite Cement (CEM II)</h3>
                 <p class="text-gray-500 text-sm expandable-content" id="product4-content">
                     CEM II is an advanced structural cement engineered by inter-grinding Portland clinker with carefully selected mineral additives or pozzolanas.
@@ -234,41 +235,35 @@
             <div class="bg-white p-6 shadow-lg border-t-8 border-valYellow hover:scale-105 transition">
                 <img src="https://val-company.com/pj1.png" alt="Project 1" class="w-full h-48 object-cover mb-4">
                 <h3 class="text-xl font-bold mb-2 uppercase">Qushtappah Silo</h3>
-                <p class="text-gray-500 text-sm expandable-content" id="project1-content">
-                    Description for Project 1. Add your details here.
+                <a href="project.html" class="expand-btn inline-block mt-2">Read More</a>
+                  <p>
+                    We completed the 65-acre steel silo project in Qushtapa under the supervision
+                    of the KRG Ministry of Trade and Industry.
                 </p>
-                <span class="expand-btn" onclick="toggleExpand('project1-content', 'project1-btn')">Read More</span>
-                <div class="hidden" id="project1-full-content">
+                <!-- <span class="expand-btn" onclick="toggleExpand('project1-content', 'project1-btn')">Read More</span> -->
+                <!-- <div class="hidden" id="project1-full-content">
                     <p class="text-gray-500 text-sm">
                         Full description for Project 1. Add your detailed information here.
                     </p>
-                </div>
+                </div> -->
             </div>
             <div class="bg-white p-6 shadow-lg border-t-8 border-valGray hover:scale-105 transition">
                 <img src="https://val-company.com/pj2.png" alt="Project 2" class="w-full h-48 object-cover mb-4">
                 <h3 class="text-xl font-bold mb-2 uppercase">Chamchamal Silo</h3>
-                <p class="text-gray-500 text-sm expandable-content" id="project2-content">
-                    Description for Project 2. Add your details here.
+                <a href="project.html" class="expand-btn inline-block mt-2">Read More</a>
+                  <p>
+                    The Chamchamal silo Project was carried out by Admin
+                    Company and Baroque in collaboration with Barcan Company.
                 </p>
-                <span class="expand-btn" onclick="toggleExpand('project2-content', 'project2-btn')">Read More</span>
-                <div class="hidden" id="project2-full-content">
-                    <p class="text-gray-500 text-sm">
-                        Full description for Project 2. Add your detailed information here.
-                    </p>
-                </div>
             </div>
             <div class="bg-white p-6 shadow-lg border-t-8 border-valYellow hover:scale-105 transition">
                 <img src="https://val-company.com/pj3.png" alt="Project 3" class="w-full h-48 object-cover mb-4">
-                <h3 class="text-xl font-bold mb-2 uppercase">Kalar Project</h3>
-                <p class="text-gray-500 text-sm expandable-content" id="project3-content">
-                    Description for Project 3. Add your details here.
+                <h3 class="text-xl font-bold mb-2 uppercase">Halabja silo</h3>
+                <a href="project.html" class="expand-btn inline-block mt-2">Read More</a>
+                  <p>
+                    The Halabja Silo Project, currently under construction by Baroque and Admin
+                    Company's experienced team.
                 </p>
-                <span class="expand-btn" onclick="toggleExpand('project3-content', 'project3-btn')">Read More</span>
-                <div class="hidden" id="project3-full-content">
-                    <p class="text-gray-500 text-sm">
-                        Full description for Project 3. Add your detailed information here.
-                    </p>
-                </div>
             </div>
         </div>
         <div class="text-center mt-12">
@@ -497,14 +492,19 @@
             mobileMenu.classList.toggle('flex');
         });
 
-        // Expandable Content Toggle
+        // Expandable Content Toggle (for Products only)
         function toggleExpand(contentId, btnId) {
             const content = document.getElementById(contentId);
+            const fullContent = document.getElementById(contentId.replace('content', 'full-content'));
             const btn = document.getElementById(btnId);
-            content.classList.toggle('expanded');
-            if (content.classList.contains('expanded')) {
+
+            if (fullContent.classList.contains('hidden')) {
+                fullContent.classList.remove('hidden');
+                content.classList.add('hidden');
                 btn.textContent = 'Read Less';
             } else {
+                fullContent.classList.add('hidden');
+                content.classList.remove('hidden');
                 btn.textContent = 'Read More';
             }
         }
@@ -563,5 +563,6 @@
             mobileMenu.classList.add('hidden');
         }
     </script>
+
 </body>
 </html>
