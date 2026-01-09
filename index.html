@@ -128,104 +128,71 @@
         </div>
     </section>
 
+
     <section id="products" class="py-24 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-6 text-center mb-16">
-            <h2 class="text-4xl font-brand font-black text-valGray uppercase" data-i18n="menu-products">Our Products</h2>
-        </div>
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div class="bg-white p-6 shadow-lg border-t-8 border-valYellow hover:scale-105 transition">
-                <img src="https://val-company.com/oms.png" alt="Product 1" class="w-full h-48 object-cover mb-4">
-                <h3 class="text-xl font-bold mb-2 uppercase">Ordinary Portland Cement (OPC)</h3>
-                <p class="text-gray-500 text-sm expandable-content" id="product1-content">
-                    Ordinary Portland Cement (OPC) is the most reliable and widely used binding agent in the construction industry. It is manufactured in strict accordance with international standards, such as ASTM C150 (Type I) or EN 197-1, ensuring superior performance across diverse structural and architectural applications.
-                </p>
-                <span class="expand-btn" onclick="toggleExpand('product1-content', 'product1-btn')">Read More</span>
-                <div class="hidden" id="product1-full-content">
-                    <p class="text-gray-500 text-sm">
-                        Technical Specifications & Features:
-                        * Structural Strength: Characterized by a high rate of compressive strength development, making it ideal for structural elements subjected to heavy loads.
-                        * Setting Time: Engineered with balanced initial and final setting times, providing engineers with the necessary flexibility for mixing, transportation, and placement.
-                        * Durability: Offers excellent resistance to weathering and environmental factors, ensuring the long-term integrity of concrete structures.
-                        * Compatibility: Highly compatible with various chemical admixtures to enhance workability, flow, or water reduction.
-                        Product Applications:
-                        * All reinforced concrete works, including bridges, columns, and slabs.
-                        * Ready-mix concrete production.
-                        * Precast concrete units and masonry products.
-                        * High-quality finishing works and cement mortar.
-                    </p>
+            <div class="max-w-7xl mx-auto px-6 text-center mb-16">
+                <h2 class="text-4xl font-brand font-black text-valGray uppercase" data-i18n="menu-products">Our Products</h2>
+            </div>
+            <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Product 1 -->
+                <div class="bg-white p-6 shadow-lg border-t-8 border-valYellow hover:scale-105 transition">
+                    <img src="https://val-company.com/oms.png" alt="Product 1" class="w-full h-48 object-cover mb-4 cursor-pointer" onclick="openFullscreen('https://val-company.com/oms.png', 'Ordinary Portland Cement (OPC)', '• Ordinary Portland Cement (OPC) is the most reliable and widely used binding agent in the construction industry.<br>• It is manufactured in strict accordance with international standards, such as ASTM C150 (Type I) or EN 197-1.<br>• Ensures superior performance across diverse structural and architectural applications.<br><strong>Technical Specifications & Features:</strong><br>• Structural Strength: High rate of compressive strength development, ideal for structural elements subjected to heavy loads.<br>• Setting Time: Balanced initial and final setting times for flexibility in mixing, transportation, and placement.<br>• Durability: Excellent resistance to weathering and environmental factors.<br>• Compatibility: Highly compatible with various chemical admixtures.<br><strong>Product Applications:</strong><br>• All reinforced concrete works, including bridges, columns, and slabs.<br>• Ready-mix concrete production.<br>• Precast concrete units and masonry products.<br>• High-quality finishing works and cement mortar.')">
+                    <h3 class="text-xl font-bold mb-2 uppercase">Ordinary Portland Cement (OPC)</h3>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="bg-white p-6 shadow-lg border-t-8 border-valGray hover:scale-105 transition">
+                    <img src="https://val-company.com/p2.png" alt="Product 2" class="w-full h-48 object-cover mb-4 cursor-pointer" onclick="openFullscreen('https://val-company.com/p2.png', 'Super Block Cement', '• Super Block Cement is a specialized, high-performance product for the masonry and precast industry.<br>• Optimized for automatic and semi-automatic production lines, ensuring exceptional quality and cost-efficiency.<br><strong>Technical Specifications & Features:</strong><br>• High Early Strength: Rapid hardening for faster demolding and increased daily production turnover.<br>• Reduced Wastage: Exceptional bonding properties minimize breakage during handling and transportation.<br>• Fine Finishes: Smooth surfaces, sharp edges, and uniform textures for blocks and curbstones.<br>• Mix Efficiency: Excellent coating of aggregates for a consistent and homogeneous mix.<br><strong>Product Applications:</strong><br>• Production of all types of masonry blocks (Hollow, Solid, and Insulated).<br>• Manufacturing of Interlocking tiles and paving stones.<br>• Production of Curbstones and unreinforced precast elements.<br>• All cement-based products requiring short curing cycles.')">
+                    <h3 class="text-xl font-bold mb-2 uppercase">Super Block Cement</h3>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="bg-white p-6 shadow-lg border-t-8 border-valYellow hover:scale-105 transition">
+                    <img src="https://val-company.com/p1.png" alt="Product 3" class="w-full h-48 object-cover mb-4 cursor-pointer" onclick="openFullscreen('https://val-company.com/p1.png', 'Bagged Ordinary Portland Cement (OPC)', '• Our Bagged OPC is the gold standard for flexibility and reliability in the construction sector.<br>• Packed under stringent quality control measures to retain full chemical and physical integrity.<br><strong>Technical Specifications & Features:</strong><br>• Premium Packaging: High-strength, multi-ply, moisture-resistant paper or laminated PP bags.<br>• Consistency: Uniform fineness and color across every bag.<br>• Operational Flexibility: Ideal for medium-to-small scale projects and restricted access sites.<br>• High Workability: Optimal setting times and high early strength.<br><strong>Product Applications:</strong><br>• General reinforced concrete structures (Slabs, Columns, Foundations).<br>• Masonry, plastering, and tiling mortars.<br>• Renovation, repair, and maintenance projects.<br>• General infrastructure and pavement works.')">
+                    <h3 class="text-xl font-bold mb-2 uppercase">Bagged Ordinary Portland Cement (OPC)</h3>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="bg-white p-6 shadow-lg border-t-8 border-valGray hover:scale-105 transition">
+                    <img src="https://val-company.com/pc4.png" alt="Product 4" class="w-full h-48 object-cover mb-4 cursor-pointer" onclick="openFullscreen('https://val-company.com/pc4.png', 'Bagged Portland Composite Cement (CEM II)', '• CEM II is an advanced structural cement engineered by inter-grinding Portland clinker with mineral additives or pozzolanas.<br>• Offers a perfect synergy between high durability, superior workability, and eco-friendly construction.<br><strong>Technical Specifications & Features:</strong><br>• Superior Workability: Fine particle distribution for a smoother mix, reducing voids and surface cracks.<br>• Low Heat of Hydration: Ideal for hot weather concreting and minimizing thermal cracking.<br>• Enhanced Durability: Increased resistance to chemical attacks and reduced permeability.<br>• Premium Packaging: Moisture-proof, high-durability bags for optimal freshness.<br><strong>Product Applications:</strong><br>• Internal and external plastering (rendering) and architectural finishes.<br>• Masonry works, bricklaying, and tile adhesives.<br>• Mass concrete and non-structural elements.<br>• General paving and floor screeds.')">
+                    <h3 class="text-xl font-bold mb-2 uppercase">Bagged Portland Composite Cement (CEM II)</h3>
                 </div>
             </div>
-            <div class="bg-white p-6 shadow-lg border-t-8 border-valGray hover:scale-105 transition">
-                <img src="https://val-company.com/p2.png" alt="Product 2" class="w-full h-48 object-cover mb-4">
-                <h3 class="text-xl font-bold mb-2 uppercase">Super Block Cement</h3>
-                <p class="text-gray-500 text-sm expandable-content" id="product2-content">
-                    Super Block Cement is a specialized, high-performance product engineered specifically for the masonry and precast industry.
-                </p>
-                <span class="expand-btn" onclick="toggleExpand('product2-content', 'product2-btn')">Read More</span>
-                <div class="hidden" id="product2-full-content">
-                    <p class="text-gray-500 text-sm">
-                        Its unique formulation is optimized for automatic and semi-automatic production lines, ensuring exceptional quality and cost-efficiency.
-                        Technical Specifications & Features:
-                        * High Early Strength: Developed to provide rapid hardening, allowing for faster demolding and increased daily production turnover.
-                        * Reduced Wastage: Exceptional bonding properties significantly minimize breakage and crumbling during handling and transportation.
-                        * Fine Finishes: The optimized fineness ensures smooth surfaces, sharp edges, and uniform textures for blocks and curbstones.
-                        * Mix Efficiency: Provides excellent coating of aggregates, resulting in a consistent and homogeneous mix with optimized cement content.
-                        Product Applications:
-                        * Production of all types of masonry blocks (Hollow, Solid, and Insulated).
-                        * Manufacturing of Interlocking tiles and paving stones.
-                        * Production of Curbstones and unreinforced precast elements.
-                        * All cement-based products requiring short curing cycles.
-                    </p>
+        </section>
+
+        <!-- Fullscreen Modal -->
+        <div id="fullscreenModal" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center hidden z-50 p-4">
+            <div class="max-w-4xl w-full bg-white rounded-lg overflow-hidden">
+                <div class="p-4 bg-gray-100 flex justify-between items-center">
+                    <h2 id="modalTitle" class="text-xl font-bold"></h2>
+                    <button onclick="closeFullscreen()" class="text-2xl font-bold">&times;</button>
                 </div>
-            </div>
-            <div class="bg-white p-6 shadow-lg border-t-8 border-valYellow hover:scale-105 transition">
-                <img src="https://val-company.com/p1.png" alt="Product 3" class="w-full h-48 object-cover mb-4">
-                <h3 class="text-xl font-bold mb-2 uppercase">Bagged Ordinary Portland Cement (OPC)</h3>
-                <p class="text-gray-500 text-sm expandable-content" id="product3-content">
-                    Our Bagged OPC is the gold standard for flexibility and reliability in the construction sector.
-                </p>
-                <span class="expand-btn" onclick="toggleExpand('product3-content', 'product3-btn')">Read More</span>
-                <div class="hidden" id="product3-full-content">
-                    <p class="text-gray-500 text-sm">
-                        Packed under stringent quality control measures, it ensures that the cement retains its full chemical and physical integrity from the production line to the project site.
-                        Technical Specifications & Features:
-                        * Premium Packaging: Encased in high-strength, multi-ply, moisture-resistant paper or laminated PP bags, designed to withstand rigorous handling and extend shelf life.
-                        * Consistency: Delivers uniform fineness and color across every bag, ensuring consistent performance for concrete and mortar mixes.
-                        * Operational Flexibility: The ideal solution for medium-to-small scale projects and sites with restricted access for bulk tankers.
-                        * High Workability: Engineered for optimal setting times and high early strength, facilitating both manual and mechanical mixing processes.
-                        Product Applications:
-                        * General reinforced concrete structures (Slabs, Columns, Foundations).
-                        * Masonry, plastering, and tiling mortars.
-                        * Renovation, repair, and maintenance projects.
-                        * General infrastructure and pavement works.
-                    </p>
-                </div>
-            </div>
-            <div class="bg-white p-6 shadow-lg border-t-8 border-valGray hover:scale-105 transition">
-                <img src="https://val-company.com/pc4.png" alt="Product 4" class="w-full h-48 object-cover mb-4">
-                <h3 class="text-xl font-bold mb-2 uppercase">Bagged Portland Composite Cement (CEM II)</h3>
-                <p class="text-gray-500 text-sm expandable-content" id="product4-content">
-                    CEM II is an advanced structural cement engineered by inter-grinding Portland clinker with carefully selected mineral additives or pozzolanas.
-                </p>
-                <span class="expand-btn" onclick="toggleExpand('product4-content', 'product4-btn')">Read More</span>
-                <div class="hidden" id="product4-full-content">
-                    <p class="text-gray-500 text-sm">
-                        It offers a perfect synergy between high durability, superior workability, and eco-friendly construction.
-                        Technical Specifications & Features:
-                        * Superior Workability: Its fine particle distribution ensures a smoother mix, making it easier to handle and reducing voids and surface cracks.
-                        * Low Heat of Hydration: Produces less heat during the setting process, making it ideal for hot weather concreting and minimizing thermal cracking.
-                        * Enhanced Durability: The composite components provide increased resistance to chemical attacks and reduce permeability, protecting the embedded reinforcement.
-                        * Premium Packaging: Supplied in moisture-proof, high-durability bags to maintain optimal freshness and performance during storage.
-                        Product Applications:
-                        * Internal and external plastering (rendering) and architectural finishes.
-                        * Masonry works, bricklaying, and tile adhesives.
-                        * Mass concrete and non-structural elements.
-                        * General paving and floor screeds.
-                    </p>
-                </div>
+                <img id="modalImage" class="w-full h-auto" alt="Fullscreen Image">
+                <div id="modalDescription" class="p-4 text-gray-700"></div>
             </div>
         </div>
-    </section>
+
+        <script>
+            function openFullscreen(imageSrc, title, description) {
+                const modal = document.getElementById('fullscreenModal');
+                const modalImage = document.getElementById('modalImage');
+                const modalTitle = document.getElementById('modalTitle');
+                const modalDescription = document.getElementById('modalDescription');
+
+                modalImage.src = imageSrc;
+                modalTitle.textContent = title;
+                modalDescription.innerHTML = description;
+
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeFullscreen() {
+                const modal = document.getElementById('fullscreenModal');
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        </script>
 
     <section id="projects" class="py-24 bg-gray-50">
         <div class="max-w-7xl mx-auto px-6 text-center mb-16">
