@@ -30,9 +30,32 @@
     <style>
         html { scroll-behavior: smooth; }
         body.rtl { direction: rtl; font-family: 'Noto Sans Arabic', 'Montserrat', sans-serif; }
-        .hero-bg { background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('https://val-company.com/hero0.jpg'); background-size: cover; background-position: center; background-attachment: fixed; }
+
+        /* RTL specific spacing fixes */
+        .rtl .space-x-3 > * + * { margin-left: 0; margin-right: 0.75rem; }
+        .rtl .space-x-8 > * + * { margin-left: 0; margin-right: 2rem; }
+        .rtl .space-x-6 > * + * { margin-left: 0; margin-right: 1.5rem; }
+
+        /* RTL text alignment */
+        .rtl .text-left { text-align: right; }
+        .rtl .text-right { text-align: left; }
+
+        /* RTL padding/margin fixes */
+        .rtl .pl-6 { padding-left: 0; padding-right: 1.5rem; }
+        .rtl .mr-4 { margin-right: 0; margin-left: 1rem; }
+
+        .hero-bg {
+            background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('https://val-company.com/hero0.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
         .lang-btn.active { color: #F2D26D; font-weight: bold; border-bottom: 2px solid #F2D26D; }
-        @media (max-width: 768px) { .hero-bg { background-attachment: scroll; } }
+
+        @media (max-width: 768px) {
+            .hero-bg { background-attachment: scroll; }
+            .hover\:scale-105:hover { transform: none; }
+        }
 
         /* Modal Styles */
         .modal {
@@ -58,10 +81,10 @@
         }
         .modal-images {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 10px;
             padding: 10px 0;
-            max-height: 60vh;
+            max-height: 50vh;
             overflow-y: auto;
         }
         .modal-images img {
@@ -82,10 +105,16 @@
             font-size: 24px;
             cursor: pointer;
             color: #474747;
+            z-index: 10;
+        }
+        .rtl .close-modal {
+            right: auto;
+            left: 20px;
         }
         .modal-title {
             text-align: center;
             margin-bottom: 20px;
+            padding-right: 40px;
         }
         .modal-details {
             white-space: pre-line;
@@ -96,24 +125,33 @@
             background-color: #f9f9f9;
             border-radius: 8px;
         }
+
+        /* Improved Image Cards */
         .image-card {
             width: 100%;
-            height: 150px;
+            height: 200px;
             background-color: #f3f4f6;
+            background-size: cover;
+            background-position: center;
             border-radius: 8px;
             display: flex;
-            align-items: center;
+            align-items: flex-end;
             justify-content: center;
-            color: #9ca3af;
+            color: white;
             font-size: 14px;
+            font-weight: bold;
             cursor: pointer;
             transition: transform 0.3s ease;
             border: 1px solid #e5e7eb;
+            padding: 12px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            background-blend-mode: darken;
         }
         .image-card:hover {
             transform: scale(1.03);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
         .fullscreen-modal {
             display: none;
             position: fixed;
@@ -121,14 +159,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.95);
             z-index: 2000;
             align-items: center;
             justify-content: center;
         }
         .fullscreen-modal img {
-            max-width: 800px;
-            max-height: 800px;
+            max-width: 90%;
+            max-height: 90%;
             object-fit: contain;
         }
         .close-fullscreen {
@@ -138,19 +176,27 @@
             font-size: 30px;
             cursor: pointer;
             color: white;
+            z-index: 2001;
         }
-        .zoomed-image {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            max-width: 90%;
-            max-height: 90%;
-            z-index: 2000;
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                margin: 5% auto;
+                padding: 15px;
+            }
+            .modal-images {
+                grid-template-columns: repeat(2, 1fr);
+                max-height: 40vh;
+            }
+            .modal-details {
+                max-height: 25vh;
+                font-size: 14px;
+            }
+            .image-card {
+                height: 150px;
+                font-size: 12px;
+            }
         }
     </style>
 </head>
@@ -159,78 +205,95 @@
     <nav class="fixed w-full z-50 bg-white shadow-lg border-b-2 border-valYellow">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20">
-                <div class="flex items-center space-x-3">
-                    <img src="https://val-company.com/vls1.png" alt="VAL Logo" class="h-12 w-auto">
+                <div class="flex items-center space-x-3 rtl:space-x-reverse">
+                    <img src="https://val-company.com/vls1.png" alt="VAL Logo" class="h-10 sm:h-12 w-auto">
                     <div class="flex flex-col">
-                        <span class="text-xl md:text-2xl font-brand font-black text-valGray leading-none uppercase">VAL Company</span>
-                        <span class="text-[9px] font-bold text-valYellow uppercase tracking-wider" data-i18n="nav-sub">the main agent for Dabin Cement</span>
+                        <span class="text-lg sm:text-xl md:text-2xl font-brand font-black text-valGray leading-none uppercase">VAL Company</span>
+                        <span class="text-[8px] sm:text-[9px] font-bold text-valYellow uppercase tracking-wider" data-i18n="nav-sub">the main agent for Dabin Cement</span>
                     </div>
                 </div>
 
-                <div class="hidden lg:flex items-center space-x-8 text-xs font-black uppercase tracking-widest text-valGray">
+                <div class="hidden lg:flex items-center space-x-8 rtl:space-x-reverse text-xs font-black uppercase tracking-widest text-valGray">
                     <a href="index.html" class="hover:text-valYellow transition" data-i18n="menu-home">Home</a>
                     <a href="index.html#about" class="hover:text-valYellow transition" data-i18n="menu-about">About</a>
                     <a href="index.html#products" class="hover:text-valYellow transition" data-i18n="menu-products">Products</a>
                     <a href="#projects" class="hover:text-valYellow transition" data-i18n="menu-projects">Projects</a>
                     <a href="index.html#services-page" class="hover:text-valYellow transition" data-i18n="menu-services-page">Services</a>
                     <a href="index.html#contact" class="bg-valGray text-white px-5 py-2 rounded hover:bg-valYellow transition" data-i18n="menu-contact">Contact</a>
-                    <div class="flex items-center space-x-3 border-l pl-6 border-gray-200">
+                    <div class="flex items-center space-x-3 rtl:space-x-reverse border-l rtl:border-l-0 rtl:border-r pl-6 rtl:pl-0 rtl:pr-6 border-gray-200">
+                        <button onclick="setLanguage('ar')" id="btn-ar" class="lang-btn">AR</button>
+                        <button onclick="setLanguage('ku')" id="btn-ku" class="lang-btn">KU</button>
                     </div>
                 </div>
 
                 <div class="lg:hidden flex items-center">
-                    <button id="menu-toggle" class="text-valGray text-2xl"><i class="fa-solid fa-bars"></i></button>
+                    <button id="menu-toggle" class="text-valGray text-2xl p-2"><i class="fa-solid fa-bars"></i></button>
                 </div>
             </div>
         </div>
 
-        <div id="mobile-menu" class="hidden absolute top-20 left-0 w-full bg-white flex-col p-6 space-y-4 shadow-xl lg:hidden">
-            <a href="index.html" class="font-bold uppercase text-sm" data-i18n="menu-home">Home</a>
-            <a href="index.html#about" class="font-bold uppercase text-sm" data-i18n="menu-about">About</a>
-            <a href="index.html#products" class="font-bold uppercase text-sm" data-i18n="menu-products">Products</a>
-            <a href="#projects" class="font-bold uppercase text-sm" data-i18n="menu-projects">Projects</a>
-            <a href="index.html#services-page" class="font-bold uppercase text-sm" data-i18n="menu-services-page">Services</a>
-            <a href="index.html#contact" class="font-bold uppercase text-sm" data-i18n="menu-contact">Contact</a>
+        <div id="mobile-menu" class="hidden absolute top-20 left-0 rtl:left-auto rtl:right-0 w-full bg-white flex-col p-6 space-y-4 shadow-xl lg:hidden">
+            <a href="index.html" class="font-bold uppercase text-sm mobile-nav-item" data-i18n="menu-home">Home</a>
+            <a href="index.html#about" class="font-bold uppercase text-sm mobile-nav-item" data-i18n="menu-about">About</a>
+            <a href="index.html#products" class="font-bold uppercase text-sm mobile-nav-item" data-i18n="menu-products">Products</a>
+            <a href="#projects" class="font-bold uppercase text-sm mobile-nav-item" data-i18n="menu-projects">Projects</a>
+            <a href="index.html#services-page" class="font-bold uppercase text-sm mobile-nav-item" data-i18n="menu-services-page">Services</a>
+            <a href="index.html#contact" class="font-bold uppercase text-sm mobile-nav-item" data-i18n="menu-contact">Contact</a>
+            <div class="flex items-center space-x-3 rtl:space-x-reverse pt-4 border-t">
+                <button onclick="setLanguage('ar')" id="mobile-btn-ar" class="lang-btn">AR</button>
+                <button onclick="setLanguage('ku')" id="mobile-btn-ku" class="lang-btn">KU</button>
+            </div>
         </div>
     </nav>
 
     <header class="hero-bg h-64 flex items-center justify-center text-white pt-20">
         <div class="max-w-7xl mx-auto px-6 w-full text-center">
-            <h1 class="text-4xl md:text-5xl font-brand font-black leading-tight mb-6 uppercase" data-i18n="projects-title">
+            <h1 class="text-3xl md:text-5xl font-brand font-black leading-tight mb-6 uppercase" data-i18n="projects-title">
                 Our Projects
             </h1>
         </div>
     </header>
 
-    <!-- New Sections Start -->
-    <section id="objectives" class="py-24 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-4xl font-brand font-black text-valGray mb-12 uppercase text-left" data-i18n="objectives-title">CEMENTS PROJECT</h2>
-            <div class="bg-white p-10 rounded-lg shadow-lg">
-                <p class="text-lg text-gray-600 mb-6 leading-relaxed">
-                    Val Company is proud to announce that it will serve as the exclusive cement provider for several of the region’s most prestigious and strategically significant developments. These include:
+    <!-- Cement Projects Section -->
+    <section id="objectives" class="py-16 md:py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 md:px-6">
+            <h2 class="text-3xl md:text-4xl font-brand font-black text-valGray mb-8 md:mb-12 uppercase text-left" data-i18n="objectives-title">CEMENTS PROJECT</h2>
+            <div class="bg-white p-6 md:p-10 rounded-lg shadow-lg">
+                <p class="text-base md:text-lg text-gray-600 mb-6 leading-relaxed" data-i18n="cement-intro">
+                    Val Company is proud to announce that it will serve as the exclusive cement provider for several of the region's most prestigious and strategically significant developments. These include:
                 </p>
 
-                <ul class="list-disc pl-6 space-y-2 text-gray-600">
-                    <li>Beverly Hills Project,</li>
-                    <li>Erbil–Koya Road</li>
-                    <li>Oro Gold Refinery</li>
-                    <li>Concrete Factories</li>
-                    <li>Block Factories</li>
-                    <li>Cement Retailers</li>
+                <ul class="list-disc pl-6 rtl:pr-6 rtl:pl-0 space-y-2 text-gray-600 mb-8">
+                    <li data-i18n="cement-bh">Beverly Hills Project</li>
+                    <li data-i18n="cement-ekr">Erbil–Koya Road</li>
+                    <li data-i18n="cement-oro">Oro Gold Refinery</li>
+                    <li data-i18n="cement-cf">Concrete Factories</li>
+                    <li data-i18n="cement-bf">Block Factories</li>
+                    <li data-i18n="cement-cr">Cement Retailers</li>
                 </ul>
 
-                <!-- 3x3 Image Placeholders -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-12">
-                    <div class="image-card" onclick="openFullscreen('https://val-company.com/bh.png')" style="background-image: url('https://val-company.com/bh.png');">Beverly Hills Project</div>
-                    <div class="image-card" onclick="openFullscreen('https://val-company.com/ekr.png')" style="background-image: url('https://val-company.com/ekr.png');">Erbil–Koya Road</div>
-                    <div class="image-card" onclick="openFullscreen('https://val-company.com/oro.png')" style="background-image: url('https://val-company.com/oro.png');">Oro Gold Refinery</div>
-                    <div class="image-card" onclick="openFullscreen('https://val-company.com/cf.png')" style="background-image: url('https://val-company.com/cf.png');">Concrete Factories</div>
-                    <div class="image-card" onclick="openFullscreen('https://val-company.com/bf.png')" style="background-image: url('https://val-company.com/bf.png');">Block Factories</div>
-                    <div class="image-card" onclick="openFullscreen('https://val-company.com/cr.png')" style="background-image: url('https://val-company.com/cr.png');">Cement Retailers</div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mt-8 md:mt-12">
+                    <div class="image-card" onclick="openFullscreen('https://val-company.com/bh.png')" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://val-company.com/bh.png');">
+                        <span data-i18n="cement-bh">Beverly Hills Project</span>
+                    </div>
+                    <div class="image-card" onclick="openFullscreen('https://val-company.com/ekr.png')" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://val-company.com/ekr.png');">
+                        <span data-i18n="cement-ekr">Erbil–Koya Road</span>
+                    </div>
+                    <div class="image-card" onclick="openFullscreen('https://val-company.com/oro.png')" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://val-company.com/oro.png');">
+                        <span data-i18n="cement-oro">Oro Gold Refinery</span>
+                    </div>
+                    <div class="image-card" onclick="openFullscreen('https://val-company.com/cf.png')" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://val-company.com/cf.png');">
+                        <span data-i18n="cement-cf">Concrete Factories</span>
+                    </div>
+                    <div class="image-card" onclick="openFullscreen('https://val-company.com/bf.png')" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://val-company.com/bf.png');">
+                        <span data-i18n="cement-bf">Block Factories</span>
+                    </div>
+                    <div class="image-card" onclick="openFullscreen('https://val-company.com/cr.png')" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://val-company.com/cr.png');">
+                        <span data-i18n="cement-cr">Cement Retailers</span>
+                    </div>
                 </div>
 
-                <p class="text-lg text-gray-600 mt-12 leading-relaxed">
+                <p class="text-base md:text-lg text-gray-600 mt-8 md:mt-12 leading-relaxed" data-i18n="cement-conclusion">
                     Through our commitment to uncompromising quality, reliability, and timely supply, Val Company ensures that these landmark projects are built on a foundation of strength, durability, and excellence, contributing to sustainable infrastructure growth and regional development.
                 </p>
             </div>
@@ -238,87 +301,87 @@
     </section>
 
     <!-- Silo Projects Section -->
-    <section id="silo-projects" class="py-24 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-4xl font-brand font-black text-valGray mb-12 uppercase text-left" data-i18n="silo-projects-title">SILO'S PROJECT</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <section id="silo-projects" class="py-16 md:py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 md:px-6">
+            <h2 class="text-3xl md:text-4xl font-brand font-black text-valGray mb-8 md:mb-12 uppercase text-left" data-i18n="silo-projects-title">SILO'S PROJECT</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 <!-- Project 1 -->
-                <div class="bg-white p-6 shadow-lg border-t-8 border-valYellow hover:scale-105 transition" onclick="openProjectModal('Qushtappah Silo', ['https://val-company.com/qush/q1.png', 'https://val-company.com/qush/q2.png', 'https://val-company.com/qush/q3.png', 'https://val-company.com/qush/q4.png', 'https://val-company.com/qush/q5.png','https://val-company.com/qush/q6.png','https://val-company.com/qush/q7.png','https://val-company.com/qush/q8.png','https://val-company.com/qush/q9.png'], 'Project Features:\n\nHigh strength: The storage silo walls were reinforced with vertical stiffeners and secured by screw beams, ensuring robustness and resistance to external forces like wind, earthquakes, and snow.\n\nLong service life: By employing plates of varying thicknesses, we achieved a projected service life of 100 years for the grain storage silo body.\n\nAs Part of Barqoue Company, we are proud of our achievements and committed to continuously providing outstanding construction and contracting services. With a focus on innovation, customer satisfaction, and project excellence, we aim to remain at the forefront of the industry and deliver exceptional results for our clients.')">
-                    <img src="https://val-company.com/pj1.png" alt="Qushtappah Silo" class="w-full h-48 object-cover mb-4">
-                    <h3 class="text-xl font-bold mb-2 uppercase">Qushtappah Silo</h3>
-                    <p class="text-gray-500 text-sm">We completed the 65-acre steel silo project in Qushtapa under the supervision of the KRG Ministry of Trade and Industry.</p>
+                <div class="bg-white p-6 shadow-lg border-t-8 border-valYellow hover:scale-105 transition cursor-pointer" onclick="openProjectModal('Qushtappah Silo', ['https://val-company.com/qush/q1.png', 'https://val-company.com/qush/q2.png', 'https://val-company.com/qush/q3.png', 'https://val-company.com/qush/q4.png', 'https://val-company.com/qush/q5.png','https://val-company.com/qush/q6.png','https://val-company.com/qush/q7.png','https://val-company.com/qush/q8.png','https://val-company.com/qush/q9.png'], 'Project Features:\n\nHigh strength: The storage silo walls were reinforced with vertical stiffeners and secured by screw beams, ensuring robustness and resistance to external forces like wind, earthquakes, and snow.\n\nLong service life: By employing plates of varying thicknesses, we achieved a projected service life of 100 years for the grain storage silo body.\n\nAs Part of Barqoue Company, we are proud of our achievements and committed to continuously providing outstanding construction and contracting services. With a focus on innovation, customer satisfaction, and project excellence, we aim to remain at the forefront of the industry and deliver exceptional results for our clients.')">
+                    <img src="https://val-company.com/pj1.png" alt="Qushtappah Silo" class="w-full h-48 object-cover mb-4 rounded">
+                    <h3 class="text-xl font-bold mb-2 uppercase" data-i18n="silo-qush-title">Qushtappah Silo</h3>
+                    <p class="text-gray-500 text-sm" data-i18n="silo-qush-desc">We completed the 65-acre steel silo project in Qushtapa under the supervision of the KRG Ministry of Trade and Industry.</p>
                 </div>
 
                 <!-- Project 5 -->
-                <div class="bg-white p-6 shadow-lg border-t-8 border-valYellow hover:scale-105 transition" onclick="openProjectModal('Kalar Silo', ['https://val-company.com/kalar/k1.png', 'https://val-company.com/kalar/k2.png', 'https://val-company.com/kalar/k3.png', 'https://val-company.com/kalar/k4.png', 'https://val-company.com/kalar/k5.png','https://val-company.com/kalar/k6.png','https://val-company.com/kalar/k7.png','https://val-company.com/kalar/k8.png','https://val-company.com/kalar/k9.png'], 'The Kalar Silo project, Constructed by Baroque Company as a partner with Admin Company in collaboration with the Italian Mulmix company, in  2019 and completed in 2022, stands as one of our most significant achievements. Silos are crucial for a country\'s agricultural infrastructure, as they ensure the efficient storage and preservation of grain, reduce post-harvest losses, and stabilize food supply. This project not only enhances food security but also supports the agricultural economy in the region.\n\nThe project Budget was 27 Billion IQD.')">
-                    <img src="https://val-company.com/kalar.png" alt="Kalar Silo" class="w-full h-48 object-cover mb-4">
-                    <h3 class="text-xl font-bold mb-2 uppercase">Kalar Silo</h3>
-                    <p class="text-gray-500 text-sm">The Kalar Silo project, Constructed by Baroque Company as a partner with Admin Company in collaboration with the Italian Mulmix company.</p>
+                <div class="bg-white p-6 shadow-lg border-t-8 border-valYellow hover:scale-105 transition cursor-pointer" onclick="openProjectModal('Kalar Silo', ['https://val-company.com/kalar/k1.png', 'https://val-company.com/kalar/k2.png', 'https://val-company.com/kalar/k3.png', 'https://val-company.com/kalar/k4.png', 'https://val-company.com/kalar/k5.png','https://val-company.com/kalar/k6.png','https://val-company.com/kalar/k7.png','https://val-company.com/kalar/k8.png','https://val-company.com/kalar/k9.png'], 'The Kalar Silo project, Constructed by Baroque Company as a partner with Admin Company in collaboration with the Italian Mulmix company, in  2019 and completed in 2022, stands as one of our most significant achievements. Silos are crucial for a country\'s agricultural infrastructure, as they ensure the efficient storage and preservation of grain, reduce post-harvest losses, and stabilize food supply. This project not only enhances food security but also supports the agricultural economy in the region.\n\nThe project Budget was 27 Billion IQD.')">
+                    <img src="https://val-company.com/kalar.png" alt="Kalar Silo" class="w-full h-48 object-cover mb-4 rounded">
+                    <h3 class="text-xl font-bold mb-2 uppercase" data-i18n="silo-kalar-title">Kalar Silo</h3>
+                    <p class="text-gray-500 text-sm" data-i18n="silo-kalar-desc">The Kalar Silo project, Constructed by Baroque Company as a partner with Admin Company in collaboration with the Italian Mulmix company.</p>
                 </div>
 
                 <!-- Project 2 -->
-                <div class="bg-white p-6 shadow-lg border-t-8 border-valGray hover:scale-105 transition" onclick="openProjectModal('Chamchamal Silo', ['https://val-company.com/cham/cham1.png', 'https://val-company.com/cham/cham2.png', 'https://val-company.com/cham/cham3.png', 'https://val-company.com/cham/cham4.png', 'https://val-company.com/cham/cham5.png','https://val-company.com/cham/cham6.png','https://val-company.com/cham/cham7.png','https://val-company.com/cham/cham8.png','https://val-company.com/cham/cham9.png'], 'Full description for Chamchamal Silo. Add your detailed information here.')">
-                    <img src="https://val-company.com/pj2.png" alt="Chamchamal Silo" class="w-full h-48 object-cover mb-4">
-                    <h3 class="text-xl font-bold mb-2 uppercase">Chamchamal Silo</h3>
-                    <p class="text-gray-500 text-sm">The Chamchamal silo Project was carried out by Admin Company and Baroque in collaboration with Barcan Company.The entire project was supervised by the Ministry of Commerce and Industry of the Kurdistan Regional Government.</p>
+                <div class="bg-white p-6 shadow-lg border-t-8 border-valGray hover:scale-105 transition cursor-pointer" onclick="openProjectModal('Chamchamal Silo', ['https://val-company.com/cham/cham1.png', 'https://val-company.com/cham/cham2.png', 'https://val-company.com/cham/cham3.png', 'https://val-company.com/cham/cham4.png', 'https://val-company.com/cham/cham5.png','https://val-company.com/cham/cham6.png','https://val-company.com/cham/cham7.png','https://val-company.com/cham/cham8.png','https://val-company.com/cham/cham9.png'], 'Project Features:\n\nHigh strength: The storage silo walls were reinforced with vertical stiffeners and secured by screw beams, ensuring robustness and resistance to external forces like wind, earthquakes, and snow.\n\nLong service life: By employing plates of varying thicknesses, we achieved a projected service life of 100 years for the grain storage silo body.\n\nAs Part of Barqoue Company, we are proud of our achievements and committed to continuously providing outstanding construction and contracting services. With a focus on innovation, customer satisfaction, and project excellence, we aim to remain at the forefront of the industry and deliver exceptional results for our clients.')">
+                    <img src="https://val-company.com/pj2.png" alt="Chamchamal Silo" class="w-full h-48 object-cover mb-4 rounded">
+                    <h3 class="text-xl font-bold mb-2 uppercase" data-i18n="silo-cham-title">Chamchamal Silo</h3>
+                    <p class="text-gray-500 text-sm" data-i18n="silo-cham-desc">The Chamchamal silo Project was carried out by Admin Company and Baroque in collaboration with Barcan Company.</p>
                 </div>
+
                 <!-- Project 3 -->
-                <div class="bg-white p-6 shadow-lg border-t-8 border-valYellow hover:scale-105 transition" onclick="openProjectModal('Halabja Silo', ['https://val-company.com/hal/hal.png', 'https://val-company.com/hal/hal1.png', 'https://val-company.com/hal/hal2.png', 'https://val-company.com/hal/hal3.png', 'https://val-company.com/hal/hal4.png','https://val-company.com/hal/hal5.png','https://val-company.com/hal/hal6.png','https://val-company.com/hal/hal7.png','https://val-company.com/hal/hal8.png'], 'Full description for Halabja Silo. Add your detailed information here.')">
-                    <img src="https://val-company.com/pj3.png" alt="Halabja Silo" class="w-full h-48 object-cover mb-4">
-                    <h3 class="text-xl font-bold mb-2 uppercase">Halabja Silo</h3>
-                    <p class="text-gray-500 text-sm">The Halabja Silo Project, currently under construction by Baroque and Admin Company's experienced team.</p>
+                <div class="bg-white p-6 shadow-lg border-t-8 border-valYellow hover:scale-105 transition cursor-pointer" onclick="openProjectModal('Halabja Silo', ['https://val-company.com/hal/hal.png', 'https://val-company.com/hal/hal1.png', 'https://val-company.com/hal/hal2.png', 'https://val-company.com/hal/hal3.png', 'https://val-company.com/hal/hal4.png','https://val-company.com/hal/hal5.png','https://val-company.com/hal/hal6.png','https://val-company.com/hal/hal7.png','https://val-company.com/hal/hal8.png'], 'Project Features:\n\nHigh strength: The storage silo walls were reinforced with vertical stiffeners and secured by screw beams, ensuring robustness and resistance to external forces like wind, earthquakes, and snow.\n\nLong service life: By employing plates of varying thicknesses, we achieved a projected service life of 100 years for the grain storage silo body.\n\nAs Part of Barqoue Company, we are proud of our achievements and committed to continuously providing outstanding construction and contracting services. With a focus on innovation, customer satisfaction, and project excellence, we aim to remain at the forefront of the industry and deliver exceptional results for our clients.')">
+                    <img src="https://val-company.com/pj3.png" alt="Halabja Silo" class="w-full h-48 object-cover mb-4 rounded">
+                    <h3 class="text-xl font-bold mb-2 uppercase" data-i18n="silo-hal-title">Halabja Silo</h3>
+                    <p class="text-gray-500 text-sm" data-i18n="silo-hal-desc">The Halabja Silo Project, currently under construction by Baroque and Admin Company's experienced team.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Road Projects Section -->
-    <section id="road-projects" class="py-24 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-4xl font-brand font-black text-valGray mb-12 uppercase text-left" data-i18n="road-projects-title">ROAD PROJECTS</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <section id="road-projects" class="py-16 md:py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 md:px-6">
+            <h2 class="text-3xl md:text-4xl font-brand font-black text-valGray mb-8 md:mb-12 uppercase text-left" data-i18n="road-projects-title">ROAD PROJECTS</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 <!-- Project 4 -->
-                <div class="bg-white p-6 shadow-lg border-t-8 border-valGray hover:scale-105 transition" onclick="openProjectModal('Tanjaro-DaraRash Road', ['https://val-company.com/tanj.png'], 'Another major project undertaken by Baroque Company, and highlighted within Val Company’s business profile as part of the same corporate group, is the construction of the Tanjaro–Dara Rash Road in Sulaimaniyah. This strategic infrastructure project spans 14 kilometers and carries an allocated budget of fifty-one billion nine hundred fifty-seven million seven hundred forty thousand Iraqi dinars (51,957,740,000 IQD). The project is scheduled to be executed within 900 working days. Baroque Company’s ability to manage and deliver such large-scale, high-value projects reflects the strength, technical capability, and reliability that Val Company proudly shares as part of its organizational structure.')">
-                    <img src="https://val-company.com/tanj.png" alt="Tanjaro-DaraRash Road" class="w-full h-48 object-cover mb-4">
-                    <h3 class="text-xl font-bold mb-2 uppercase">Construction of Tanjaro-DaraRash road (14 Km) in Sulaimaniyah</h3>
-                    <p class="text-gray-500 text-sm">Another major project undertaken by Baroque Company, and highlighted within Val Company’s business profile as part of the same corporate group.</p>
+                <div class="bg-white p-6 shadow-lg border-t-8 border-valGray hover:scale-105 transition cursor-pointer" onclick="openProjectModal('Tanjaro-DaraRash Road', ['https://val-company.com/tanj.png'], 'Another major project undertaken by Baroque Company, and highlighted within Val Company's business profile as part of the same corporate group, is the construction of the Tanjaro–Dara Rash Road in Sulaimaniyah. This strategic infrastructure project spans 14 kilometers and carries an allocated budget of fifty-one billion nine hundred fifty-seven million seven hundred forty thousand Iraqi dinars (51,957,740,000 IQD). The project is scheduled to be executed within 900 working days. Baroque Company's ability to manage and deliver such large-scale, high-value projects reflects the strength, technical capability, and reliability that Val Company proudly shares as part of its organizational structure.')">
+                    <img src="https://val-company.com/tanj.png" alt="Tanjaro-DaraRash Road" class="w-full h-48 object-cover mb-4 rounded">
+                    <h3 class="text-xl font-bold mb-2 uppercase" data-i18n="road-tanj-title">Construction of Tanjaro-DaraRash road (14 Km)</h3>
+                    <p class="text-gray-500 text-sm" data-i18n="road-tanj-desc">Another major project undertaken by Baroque Company in Sulaimaniyah.</p>
                 </div>
 
                 <!-- Project 6 -->
-                <div class="bg-white p-6 shadow-lg border-t-8 border-valGray hover:scale-105 transition" onclick="openProjectModal('Akre-Qandil Road', ['https://val-company.com/akre/a1.png', 'https://val-company.com/akre/a2.png', 'https://val-company.com/akre/a3.png', 'https://val-company.com/akre/a4.png', 'https://val-company.com/akre/a5.png','https://val-company.com/akre/a6.png','https://val-company.com/akre/a7.png','https://val-company.com/akre/a8.png','https://val-company.com/akre/a9.png'], 'With an estimated cost of 42 billion Iraqi dinars, this vital road plays a pivotal role in connecting Akre District to Soran Administration. Given the heavy traffic in the area, this road is one of the most important main roads, essential for transportation and economic activity. The project is being implemented with meticulous engineering planning to enhance road safety, support regional development, and meet the growing needs of daily commuters and commercial transportation.\n\nThis project Budget: 42,000,000,000 forty two billion IQD.')">
-                    <img src="https://val-company.com/akre.png" alt="Akre-Qandil Road" class="w-full h-48 object-cover mb-4">
-                    <h3 class="text-xl font-bold mb-2 uppercase">Design and construction of Akri-Qandil road (30 km)</h3>
-                    <p class="text-gray-500 text-sm">The 30-kilometer Akre-Qandil Road Project is one of the strategic infrastructure initiatives implemented by the Kurdistan Regional Government.</p>
+                <div class="bg-white p-6 shadow-lg border-t-8 border-valGray hover:scale-105 transition cursor-pointer" onclick="openProjectModal('Akre-Qandil Road', ['https://val-company.com/akre/a1.png', 'https://val-company.com/akre/a2.png', 'https://val-company.com/akre/a3.png', 'https://val-company.com/akre/a4.png', 'https://val-company.com/akre/a5.png','https://val-company.com/akre/a6.png','https://val-company.com/akre/a7.png','https://val-company.com/akre/a8.png','https://val-company.com/akre/a9.png'], 'With an estimated cost of 42 billion Iraqi dinars, this vital road plays a pivotal role in connecting Akre District to Soran Administration. Given the heavy traffic in the area, this road is one of the most important main roads, essential for transportation and economic activity. The project is being implemented with meticulous engineering planning to enhance road safety, support regional development, and meet the growing needs of daily commuters and commercial transportation.\n\nThis project Budget: 42,000,000,000 forty two billion IQD.')">
+                    <img src="https://val-company.com/akre.png" alt="Akre-Qandil Road" class="w-full h-48 object-cover mb-4 rounded">
+                    <h3 class="text-xl font-bold mb-2 uppercase" data-i18n="road-akre-title">Design and construction of Akri-Qandil road (30 km)</h3>
+                    <p class="text-gray-500 text-sm" data-i18n="road-akre-desc">Strategic infrastructure initiative connecting Akre District to Soran Administration.</p>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <footer class="bg-valDark text-white pt-20 pb-10">
-        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-3 gap-16 border-b border-gray-700 pb-16">
+    <footer class="bg-valDark text-white pt-16 md:pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 grid lg:grid-cols-3 gap-12 md:gap-16 border-b border-gray-700 pb-12 md:pb-16">
             <div>
-                <div class="flex items-center space-x-3 mb-6">
+                <div class="flex items-center space-x-3 rtl:space-x-reverse mb-6">
                     <img src="https://val-company.com/vls1.png" alt="Logo" class="h-10">
                     <span class="text-2xl font-brand font-black">VAL Company</span>
                 </div>
-                <p class="text-gray-400 text-sm">the main agent for Dabin Cement. Building the future of Iraq with strength and vision.</p>
+                <p class="text-gray-400 text-sm" data-i18n="footer-desc">the main agent for Dabin Cement. Building the future of Iraq with strength and vision.</p>
             </div>
 
             <div>
-                <h4 class="text-valYellow font-bold uppercase tracking-widest mb-8 text-xs">Direct Contact</h4>
+                <h4 class="text-valYellow font-bold uppercase tracking-widest mb-8 text-xs" data-i18n="footer-contact">Direct Contact</h4>
                 <div class="space-y-4 text-sm font-medium">
-                    <p class="flex items-start"><i class="fa-solid fa-phone mt-1 mr-4 text-valYellow"></i> + 964 750 174 1432</p>
-                    <p class="flex items-start"><i class="fa-solid fa-phone mt-1 mr-4 text-valYellow"></i> + 964 770 036 3020</p>
-                    <p class="flex items-start"><i class="fa-solid fa-phone mt-1 mr-4 text-valYellow"></i> + 964 786 287 4849</p>
-                    <p class="flex items-center"><i class="fa-solid fa-envelope mr-4 text-valYellow"></i> info@val-company.com</p>
-                    <p class="flex items-start"><i class="fa-solid fa-location-dot mt-1 mr-4 text-valYellow"></i> Office No. 1, 14th Floor, T4 Tower, Empire World Business Center</p>
+                    <p class="flex items-start"><i class="fa-solid fa-phone mt-1 mr-4 rtl:mr-0 rtl:ml-4 text-valYellow"></i> + 964 750 174 1432</p>
+                    <p class="flex items-start"><i class="fa-solid fa-phone mt-1 mr-4 rtl:mr-0 rtl:ml-4 text-valYellow"></i> + 964 770 036 3020</p>
+                    <p class="flex items-start"><i class="fa-solid fa-phone mt-1 mr-4 rtl:mr-0 rtl:ml-4 text-valYellow"></i> + 964 786 287 4849</p>
+                    <p class="flex items-center"><i class="fa-solid fa-envelope mr-4 rtl:mr-0 rtl:ml-4 text-valYellow"></i> info@val-company.com</p>
+                    <p class="flex items-start"><i class="fa-solid fa-location-dot mt-1 mr-4 rtl:mr-0 rtl:ml-4 text-valYellow"></i> Office No. 1, 14th Floor, T4 Tower, Empire World Business Center</p>
                 </div>
             </div>
 
             <div>
-                <h4 class="text-valYellow font-bold uppercase tracking-widest mb-8 text-xs">Social Presence</h4>
-                <div class="flex space-x-6 text-2xl">
+                <h4 class="text-valYellow font-bold uppercase tracking-widest mb-8 text-xs" data-i18n="footer-social">Social Presence</h4>
+                <div class="flex space-x-6 rtl:space-x-reverse text-2xl">
                     <a href="https://www.facebook.com/Val.company.iq" class="hover:text-valYellow transition"><i class="fab fa-facebook"></i></a>
                     <a href="https://wa.me/7501741432" class="hover:text-valYellow transition"><i class="fab fa-whatsapp"></i></a>
                     <a href="https://www.instagram.com/val_company_" class="hover:text-valYellow transition"><i class="fab fa-instagram"></i></a>
@@ -347,12 +410,126 @@
     </div>
 
     <script>
+        // Translation Object
+        const trans = {
+            'ar': {
+                'nav-sub': 'الوكيل الرئيسي لإسمنت دابين',
+                'menu-home': 'الرئيسية',
+                'menu-about': 'من نحن',
+                'menu-products': 'المنتجات',
+                'menu-projects': 'المشاريع',
+                'menu-services-page': 'الخدمات',
+                'menu-contact': 'اتصل بنا',
+                'projects-title': 'مشاريعنا',
+                'objectives-title': 'مشروع الإسمنت',
+                'cement-intro': 'تفخر شركة VAL بالإعلان عن كونها المورد الحصري للإسمنت لعدة مشاريع مرموقة واستراتيجية في المنطقة، والتي تشمل:',
+                'cement-bh': 'مشروع بيفرلي هيلز',
+                'cement-ekr': 'طريق أربيل-كويا',
+                'cement-oro': 'مصفاة أورو للذهب',
+                'cement-cf': 'مصانع الخرسانة',
+                'cement-bf': 'مصانع البلوك',
+                'cement-cr': 'تجار التجزئة للإسمنت',
+                'cement-conclusion': 'من خلال التزامنا بالجودة والموثوقية والتوريد في الوقت المناسب، تضمن شركة VAL بناء هذه المشاريع على أساس من القوة والمتانة والتميز، مما يساهم في النمو المستدام للبنية التحتية والتنمية الإقليمية.',
+                'silo-projects-title': 'مشاريع الصوامع',
+                'silo-qush-title': 'صومعة قوشتبة',
+                'silo-qush-desc': 'أكملنا مشروع الصومعة الفولاذية بمساحة 65 فدان في قوشتبة تحت إشراف وزارة التجارة والصناعة لحكومة إقليم كردستان.',
+                'silo-kalar-title': 'صومعة كلار',
+                'silo-kalar-desc': 'مشروع صومعة كلار، الذي نفذته شركة باروك بالشراكة مع شركة أدمن بالتعاون مع شركة Mulmix الإيطالية.',
+                'silo-cham-title': 'صومعة چمچمال',
+                'silo-cham-desc': 'تم تنفيذ مشروع صومعة چمچمال من قبل شركة أدمن وباروك بالتعاون مع شركة باركان.',
+                'silo-hal-title': 'صومعة حلبجة',
+                'silo-hal-desc': 'مشروع صومعة حلبجة، قيد الإنشاء حاليًا من قبل فريق شركة باروك وأدمن ذوي الخبرة.',
+                'road-projects-title': 'مشاريع الطرق',
+                'road-tanj-title': 'إنشاء طريق تانجارو-دارة رش (14 كم)',
+                'road-tanj-desc': 'مشروع رئيسي آخر نفذته شركة باروك في السليمانية.',
+                'road-akre-title': 'تصميم وإنشاء طريق عقرة-قنديل (30 كم)',
+                'road-akre-desc': 'مبادرة بنية تحتية استراتيجية تربط قضاء عقرة بإدارة سوران.',
+                'footer-desc': 'الوكيل الرئيسي لإسمنت دابين. نبني مستقبل العراق بقوة ورؤية.',
+                'footer-contact': 'اتصال مباشر',
+                'footer-social': 'وسائل التواصل الاجتماعي'
+            },
+            'ku': {
+                'nav-sub': 'بریکاری سەرەکی چیمەنتۆی دابین',
+                'menu-home': 'سەرەتا',
+                'menu-about': 'دەربارە',
+                'menu-products': 'بەرهەمکان',
+                'menu-projects': 'پڕۆژەکان',
+                'menu-services-page': 'خزمەتگوزاری',
+                'menu-contact': 'پەیوەندی',
+                'projects-title': 'پڕۆژەکانمان',
+                'objectives-title': 'پڕۆژەی چیمەنتۆ',
+                'cement-intro': 'کۆمپانیای VAL شانازی پێوە دەکات کە بە دابینکەری تایبەتی چیمەنتۆ بۆ چەندین پڕۆژەی گرنگ و ستراتیژی لە هەرێمەکە خزمەت دەکات، لەوانە:',
+                'cement-bh': 'پڕۆژەی بیڤێرلی هیڵز',
+                'cement-ekr': 'ڕێگای هەولێر-کۆیە',
+                'cement-oro': 'پاڵاوتنگەی زێڕی ئۆرۆ',
+                'cement-cf': 'کارگەکانی کۆنکرێت',
+                'cement-bf': 'کارگەکانی بلۆک',
+                'cement-cr': 'فرۆشیارانی چیمەنتۆ',
+                'cement-conclusion': 'لە ڕێگەی پابەندبوونمان بە کوالیتی، متمانەپێکراوی و دابینکردنی کاتی گونجاو، کۆمپانیای VAL دڵنیایی دەداتەوە کە ئەم پڕۆژە گرنگانە لەسەر بناغەیەکی بەهێز، بەردەوام و تایبەت دروست دەکرێن، بەشدار دەبن لە گەشەی بەردەوامی ژێرخان و گەشەی هەرێمی.',
+                'silo-projects-title': 'پڕۆژەی سایلۆکان',
+                'silo-qush-title': 'سایلۆی قوشتەپە',
+                'silo-qush-desc': 'پڕۆژەی سایلۆی پۆڵایینی 65 ئێکەرمان لە قوشتەپە تەواو کرد لەژێر چاودێری وەزارەتی بازرگانی و پیشەسازی حکومەتی هەرێمی کوردستان.',
+                'silo-kalar-title': 'سایلۆی کەلار',
+                'silo-kalar-desc': 'پڕۆژەی سایلۆی کەلار، کە لەلایەن کۆمپانیای باروک بە هاوبەشی لەگەڵ کۆمپانیای ئەدمن لە هاوکاری لەگەڵ کۆمپانیای Mulmix ئیتاڵی دروستکراوە.',
+                'silo-cham-title': 'سایلۆی چەمچەماڵ',
+                'silo-cham-desc': 'پڕۆژەی سایلۆی چەمچەماڵ لەلایەن کۆمپانیای ئەدمن و باروک لە هاوکاری لەگەڵ کۆمپانیای بارکان جێبەجێ کراوە.',
+                'silo-hal-title': 'سایلۆی هەڵەبجە',
+                'silo-hal-desc': 'پڕۆژەی سایلۆی هەڵەبجە، لە ئێستادا لەلایەن تیمی شارەزای کۆمپانیای باروک و ئەدمن لەژێر دروستکردندایە.',
+                'road-projects-title': 'پڕۆژەی ڕێگاکان',
+                'road-tanj-title': 'دروستکردنی ڕێگای تانجەڕۆ-دارەڕەش (14 کم)',
+                'road-tanj-desc': 'پڕۆژەیەکی گرنگی تر کە لەلایەن کۆمپانیای باروک لە سلێمانی جێبەجێ کراوە.',
+                'road-akre-title': 'دیزاین و دروستکردنی ڕێگای عەقرە-قەندیل (30 کم)',
+                'road-akre-desc': 'دەستپێشخەری ژێرخانی ستراتیژی کە قەزای عەقرە بە بەڕێوەبەرایەتی سۆران دەبەستێتەوە.',
+                'footer-desc': 'بریکاری سەرەکی چیمەنتۆی دابین. داهاتووی عێراق بە هێز و بینین دروست دەکەین.',
+                'footer-contact': 'پەیوەندی ڕاستەوخۆ',
+                'footer-social': 'تۆڕە کۆمەڵایەتییەکان'
+            }
+        };
+
+        // Language Switcher Function
+        function setLanguage(lang) {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (trans[lang] && trans[lang][key]) {
+                    el.innerHTML = trans[lang][key];
+                }
+            });
+
+            if (lang === 'ar' || lang === 'ku') {
+                document.body.classList.add('rtl');
+                document.documentElement.setAttribute('dir', 'rtl');
+            } else {
+                document.body.classList.remove('rtl');
+                document.documentElement.setAttribute('dir', 'ltr');
+            }
+
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(`btn-${lang}`).classList.add('active');
+            const mobileBtn = document.getElementById(`mobile-btn-${lang}`);
+            if (mobileBtn) mobileBtn.classList.add('active');
+
+            // Close mobile menu
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu) {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+            }
+        }
+
         // Menu Toggle
         const menuBtn = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
         menuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
             mobileMenu.classList.toggle('flex');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+            });
         });
 
         // Modal Functions
@@ -363,7 +540,7 @@
             const modalDetails = document.getElementById('modal-details');
 
             modalTitle.textContent = title;
-            modalImages.innerHTML = images.map(img => `<img src="${img}" alt="${title}" onclick="zoomImage(this, '${img}')">`).join('');
+            modalImages.innerHTML = images.map(img => `<img src="${img}" alt="${title}" onclick="zoomImage('${img}')">`).join('');
             modalDetails.textContent = details;
 
             modal.style.display = 'block';
@@ -376,7 +553,7 @@
             document.body.style.overflow = 'auto';
         }
 
-        function zoomImage(img, src) {
+        function zoomImage(src) {
             const fullscreenModal = document.getElementById('fullscreen-modal');
             const fullscreenImage = document.getElementById('fullscreen-image');
             fullscreenImage.src = src;
@@ -402,6 +579,11 @@
             if (event.target === modal) closeModal();
             if (event.target === fullscreenModal) closeFullscreen();
         };
+
+        // Set default language on load
+        document.addEventListener('DOMContentLoaded', () => {
+            setLanguage('en');
+        });
     </script>
 </body>
 </html>
